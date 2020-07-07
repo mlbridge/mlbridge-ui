@@ -711,7 +711,7 @@ app.layout = html.Div(children=[
                                                  selected_rows=[],
                                              )
                                          ], )
-                                     ], label='Blacklist', value='blacklist',
+                                     ], label='Malicious', value='blacklist',
                                          className='pretty_container'),
                                  ], style={'color': '#2e86c1', 'font-size': '18px'}),
                     ], className='pretty_container nine columns',
@@ -729,7 +729,7 @@ app.layout = html.Div(children=[
                                 {"label": "Not Vetted", "value": "not_vetted"},
                                 {"label": "Benign", "value": "benign_vet"},
                                 {"label": "Honeypot", "value": "honeypot"},
-                                {"label": "Blacklist", "value": "blacklist"}
+                                {"label": "Malicious", "value": "blacklist"}
                             ],
                             labelStyle={"display": "inline-block"},
                             style={'color': '#2e86c1'},
@@ -1145,14 +1145,14 @@ def update_whois_info(n_clicks, domain_name):
                 try:
                     ips = data['WhoisRecord']['ips']
                     for i in ips:
-                        whois_ip = whois_ip + i + ' '
+                        whois_ip = whois_ip + i + ' | '
                 except:
                     whois_ip = '-'
 
                 try:
                     hostnames = data['WhoisRecord']['nameServers']['hostNames']
                     for i in hostnames:
-                        whois_hostnames = whois_hostnames + i + ' '
+                        whois_hostnames = whois_hostnames + i + ' | '
                 except:
                     whois_hostnames = '-'
 

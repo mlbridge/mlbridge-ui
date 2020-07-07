@@ -1,1 +1,1 @@
-# mlbridge-visualization_dashboard
+# mlbridge-ui

@@ -777,11 +777,33 @@ app.layout = html.Div(children=[
                         html.Div(id='input_model_message',
                                  className="control_label"),
 
+                        html.Div([
+                            html.P("Status:",
+                                   style={'display': 'inline',
+                                          'color': '#2e86c1',
+                                          'font-size': '18px'},
+                                   className="control_label", ),
+                            dcc.RadioItems(
+                                id="model_option",
+                                options=[
+                                    {"label": "Train Model ",
+                                     "value": "training"},
+                                    {"label": "Load Model ",
+                                     "value": "load"},
+                                ],
+                                labelStyle={"display":
+                                                "inline-block"},
+                                style={'color': '#2e86c1'},
+                                className="dcc_control",
+                            ),
+                        ])
+
 
                     ], className='pretty_container'),
                 ], className='three columns'),
 
                 html.Div([
+
 
                 ], className='pretty_container nine columns'),
 

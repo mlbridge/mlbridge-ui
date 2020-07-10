@@ -753,7 +753,39 @@ app.layout = html.Div(children=[
 
         ], label='Vetting', value='manual_vetting',
             className='pretty_container'),
+
         dcc.Tab([
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.Div([
+                            html.P(
+                                "Model :",
+                                style={'display': 'inline',
+                                       'color': '#2e86c1',
+                                       'font-size': '18px'},
+                                className="control_label"
+                            ),
+                            dcc.Input(
+                                placeholder='Enter Model Name',
+                                type='text',
+                                id='input_model',
+                                className='dcc_control',
+                                style={'width': '141px'}
+                            ),
+                        ]),
+                        html.Div(id='input_model_message',
+                                 className="control_label"),
+
+
+                    ], className='pretty_container'),
+                ], className='three columns'),
+
+                html.Div([
+
+                ], className='pretty_container nine columns'),
+
+            ], className='row')
 
         ], label='Training', value='machine_learning',
             className='pretty_container')

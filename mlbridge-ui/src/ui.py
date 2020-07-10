@@ -503,7 +503,7 @@ app.layout = html.Div(children=[
                 ],
                 className="row flex-display",
             ),
-        ], label='Historical Analysis', value='historical_analysis',
+        ], label='Analysis', value='historical_analysis',
             className='pretty_container'
         ),
 
@@ -751,10 +751,13 @@ app.layout = html.Div(children=[
                 ], className='pretty_container three columns')
             ], className="row")
 
-        ], label='Manual Vetting', value='manual_vetting',
-            className='pretty_container',
-        )
-    ], style={'color': '#2e86c1', 'font-size': '18px', 'width': '500px'})
+        ], label='Vetting', value='manual_vetting',
+            className='pretty_container'),
+        dcc.Tab([
+
+        ], label='Training', value='machine_learning',
+            className='pretty_container')
+    ], style={'color': '#2e86c1', 'font-size': '18px', 'width': '600px'})
 ])
 
 

@@ -760,7 +760,7 @@ app.layout = html.Div(children=[
                     html.Div([
                         html.Div([
                             html.P(
-                                "Model :",
+                                "Model:",
                                 style={'display': 'inline',
                                        'color': '#2e86c1',
                                        'font-size': '18px'},
@@ -778,7 +778,7 @@ app.layout = html.Div(children=[
                                  className="control_label"),
 
                         html.Div([
-                            html.P("Status:",
+                            html.P("Model Action:",
                                    style={'display': 'inline',
                                           'color': '#2e86c1',
                                           'font-size': '18px'},
@@ -791,19 +791,73 @@ app.layout = html.Div(children=[
                                     {"label": "Load Model ",
                                      "value": "load"},
                                 ],
-                                labelStyle={"display":
-                                                "inline-block"},
+                                labelStyle={"display": "inline-block"},
                                 style={'color': '#2e86c1'},
                                 className="dcc_control",
                             ),
-                        ])
+                        ]),
+
+                        html.Div(id='model_option_message',
+                                 className="control_label"),
+
+                        html.Div([
+                            html.Div([
+                                html.P(
+                                    "Epochs:",
+                                    style={'display': 'inline',
+                                           'color': '#2e86c1',
+                                           'font-size': '18px'},
+                                    className="control_label"
+                                ),
+                                dcc.Input(
+                                    placeholder='Num of epochs',
+                                    type='text',
+                                    id='input_epochs',
+                                    className='dcc_control',
+                                    style={'width': '120px'}
+                                ),
+                            ]),
+
+                            html.Div(id='epoch_message',
+                                     className="control_label"),
+
+                            html.Div([
+                                html.P(
+                                    "Batch:",
+                                    style={'display': 'inline',
+                                           'color': '#2e86c1',
+                                           'font-size': '18px'},
+                                    className="control_label"
+                                ),
+                                dcc.Input(
+                                    placeholder='Batch size',
+                                    type='text',
+                                    id='input_samples',
+                                    className='dcc_control',
+                                    style={'width': '120px',
+                                           'margin-left': '15px'}
+                                ),
+                            ]),
+
+                            html.Div(id='batch_message',
+                                     className="control_label"),
+
+
+                        ], id='training_options'),
+
+                        html.Button('Enter',
+                                    id='submit_model',
+                                    n_clicks=0,
+                                    style={
+                                           'margin-left': '110px',
+                                           'color': '#2e86c1',
+                                           'font': 'Arial'}, ),
 
 
                     ], className='pretty_container'),
                 ], className='three columns'),
 
                 html.Div([
-
 
                 ], className='pretty_container nine columns'),
 

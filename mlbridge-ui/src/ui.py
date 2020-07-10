@@ -832,7 +832,7 @@ app.layout = html.Div(children=[
                                 dcc.Input(
                                     placeholder='Batch size',
                                     type='text',
-                                    id='input_samples',
+                                    id='input_batch',
                                     className='dcc_control',
                                     style={'width': '120px',
                                            'margin-left': '15px'}
@@ -842,17 +842,15 @@ app.layout = html.Div(children=[
                             html.Div(id='batch_message',
                                      className="control_label"),
 
-
                         ], id='training_options'),
 
                         html.Button('Enter',
                                     id='submit_model',
                                     n_clicks=0,
                                     style={
-                                           'margin-left': '110px',
-                                           'color': '#2e86c1',
-                                           'font': 'Arial'}, ),
-
+                                        'margin-left': '110px',
+                                        'color': '#2e86c1',
+                                        'font': 'Arial'}, ),
 
                     ], className='pretty_container'),
                 ], className='three columns'),
@@ -1396,6 +1394,36 @@ def update_blacklist_vet_table(n_intervals):
     return data
 
 
+# Training
+
+def update_epochs_message(n_clicks, epochs_input):
+    if epochs_input is None or epochs_input == '':
+        return 'Please enter an integer value'
+    else:
+        try:
+            epochs = int(epochs_input)
+            if epochs > 0:
+                return 'You have entered ' + str(epochs) + ' epochs.'
+            else:
+                return 'Please enter a value greater than 0'
+        except:
+            return 'Please enter an integer value'
+
+
+def update_batch_message(n_clicks, batch_input):
+    if batch_input is None or batch_input == '':
+        return 'Please enter an integer value'
+    else:
+        try:
+            epochs = int(batch_input)
+            if epochs > 0:
+                return 'You have entered ' + str(epochs) + ' epochs.'
+            else:
+                return 'Please enter a value greater than 0'
+        except:
+            return 'Please enter an integer value'
+
+
 # Dash Functions
 
 # Historical Analysis
@@ -1612,6 +1640,24 @@ def update_honeypot_vet_table_dash(n_intervals):
 def update_blacklist_vet_table_dash(n_intervals):
     data = update_blacklist_vet_table(n_intervals)
     return data
+
+
+# Training
+
+@app.callback(Output('epoch_message', 'children'),
+              [Input('submit_model', 'n_clicks')],
+              [State('input_epochs', 'value')])
+def update_epochs_message_dash(n_clicks, value):
+    message = update_epochs_message(n_clicks, value)
+    return message
+
+
+@app.callback(Output('batch_message', 'children'),
+              [Input('submit_model', 'n_clicks')],
+              [State('input_batch', 'value')])
+def update_epochs_message_dash(n_clicks, value):
+    message = update_epochs_message(n_clicks, value)
+    return message
 
 
 if __name__ == '__main__':

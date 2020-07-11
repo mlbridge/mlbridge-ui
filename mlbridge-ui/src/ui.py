@@ -860,6 +860,26 @@ app.layout = html.Div(children=[
                 ], className='three columns'),
 
                 html.Div([
+                    daq.ToggleSwitch(
+                        id='train_switch',
+                        value=False,
+                        vertical=False,
+                        labelPosition='bottom',
+                        style={'float': 'right'}
+                    ),
+
+                    html.Br(),
+                    html.Br(),
+
+                    html.Div([
+                        dcc.Graph(id='loss_graph', )],
+                        id='loss_graph_div',
+                    ),
+
+                    html.Div([
+                        dcc.Graph(id='acc_graph', )],
+                        id='acc_graph_div'),
+
 
                 ], className='pretty_container nine columns'),
 
@@ -1436,6 +1456,13 @@ def update_batch_message(n_clicks, batch_input):
             return 'Please enter an integer value'
 
 
+def update_loss_accuracy_display(value):
+    if value is False:
+        return {'display': 'unset'}, {'display': 'none'}
+    else:
+        return {'display': 'none'}, {'display': 'unset'}
+
+
 # Dash Functions
 
 # Historical Analysis
@@ -1677,6 +1704,13 @@ def update_epochs_message_dash(n_clicks, value):
 def update_epochs_message_dash(n_clicks, value):
     message = update_epochs_message(n_clicks, value)
     return message
+
+@app.callback([Output('loss_graph', 'style'),
+               Output('acc_graph', 'style')],
+              [Input('train_switch', 'value')])
+def update_loss_accuracy_display_dash(value):
+    display_loss, display_acc = update_loss_accuracy_display(value)
+    return display_loss, display_acc
 
 
 if __name__ == '__main__':

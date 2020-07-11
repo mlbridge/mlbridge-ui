@@ -775,7 +775,8 @@ app.layout = html.Div(children=[
                             ),
                         ]),
                         html.Div(id='input_model_message',
-                                 className="control_label"),
+                                 className="control_label",
+                                 style={'margin-bottom': '10px'}),
 
                         html.Div([
                             html.P("Model Action:",
@@ -798,7 +799,8 @@ app.layout = html.Div(children=[
                         ]),
 
                         html.Div(id='model_option_message',
-                                 className="control_label"),
+                                 className="control_label",
+                                 style={'margin-bottom': '10px'}),
 
                         html.Div([
                             html.Div([
@@ -819,7 +821,8 @@ app.layout = html.Div(children=[
                             ]),
 
                             html.Div(id='epoch_message',
-                                     className="control_label"),
+                                     className="control_label",
+                                     style={'margin-bottom': '10px'}),
 
                             html.Div([
                                 html.P(
@@ -840,7 +843,8 @@ app.layout = html.Div(children=[
                             ]),
 
                             html.Div(id='batch_message',
-                                     className="control_label"),
+                                     className="control_label",
+                                     style={'margin-bottom': '10px'}),
 
                         ], id='training_options'),
 
@@ -1396,6 +1400,14 @@ def update_blacklist_vet_table(n_intervals):
 
 # Training
 
+
+def update_display_training_options(value):
+    if value is None or value == 'load':
+        return {'display': 'none'}
+    else:
+        return {'display': 'unset'}
+
+
 def update_epochs_message(n_clicks, epochs_input):
     if epochs_input is None or epochs_input == '':
         return 'Please enter an integer value'
@@ -1643,6 +1655,13 @@ def update_blacklist_vet_table_dash(n_intervals):
 
 
 # Training
+
+@app.callback(Output('training_options', 'style'),
+              [Input('model_option', 'value')])
+def update_display_training_options_dash(value):
+    display = update_display_training_options(value)
+    return display
+
 
 @app.callback(Output('epoch_message', 'children'),
               [Input('submit_model', 'n_clicks')],

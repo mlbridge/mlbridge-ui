@@ -846,6 +846,27 @@ app.layout = html.Div(children=[
                                      className="control_label",
                                      style={'margin-bottom': '10px'}),
 
+                            html.Div([
+                                html.P(
+                                    "Sample:",
+                                    style={'display': 'inline',
+                                           'color': '#2e86c1',
+                                           'font-size': '18px'},
+                                    className="control_label"
+                                ),
+                                dcc.Input(
+                                    placeholder='Sample size',
+                                    type='text',
+                                    id='input_sample',
+                                    className='dcc_control',
+                                    style={'width': '120px'}
+                                ),
+                            ]),
+
+                            html.Div(id='sample_message',
+                                     className="control_label",
+                                     style={'margin-bottom': '10px'}),
+
                         ], id='training_options'),
 
                         html.Button('Enter',
@@ -879,7 +900,6 @@ app.layout = html.Div(children=[
                     html.Div([
                         dcc.Graph(id='acc_graph', )],
                         id='acc_graph_div'),
-
 
                 ], className='pretty_container nine columns'),
 
@@ -1447,9 +1467,23 @@ def update_batch_message(n_clicks, batch_input):
         return 'Please enter an integer value'
     else:
         try:
-            epochs = int(batch_input)
+            batch_size = int(batch_input)
+            if batch_size > 0:
+                return 'You have entered ' + str(batch_size) + ' batch-size.'
+            else:
+                return 'Please enter a value greater than 0'
+        except:
+            return 'Please enter an integer value'
+
+
+def update_sample_message(n_clicks, sample_message):
+    if sample_message is None or sample_message == '':
+        return 'Please enter an integer value'
+    else:
+        try:
+            epochs = int(sample_message)
             if epochs > 0:
-                return 'You have entered ' + str(epochs) + ' epochs.'
+                return 'You have entered ' + str(sample_message) + ' samples.'
             else:
                 return 'Please enter a value greater than 0'
         except:
@@ -1704,6 +1738,15 @@ def update_epochs_message_dash(n_clicks, value):
 def update_epochs_message_dash(n_clicks, value):
     message = update_epochs_message(n_clicks, value)
     return message
+
+
+@app.callback(Output('sample_message', 'children'),
+              [Input('submit_model', 'n_clicks')],
+              [State('input_batch', 'value')])
+def update_sample_message_dash(n_clicks, value):
+    message = update_sample_message(n_clicks, value)
+    return message
+
 
 @app.callback([Output('loss_graph', 'style'),
                Output('acc_graph', 'style')],

@@ -899,7 +899,8 @@ app.layout = html.Div(children=[
 
                     html.Div([
                         dcc.Graph(id='acc_graph', )],
-                        id='acc_graph_div'),
+                        id='acc_graph_div',
+                    )
 
                 ], className='pretty_container nine columns'),
 
@@ -1497,6 +1498,29 @@ def update_loss_accuracy_display(value):
         return {'display': 'none'}, {'display': 'unset'}
 
 
+def update_loss_graph(n_clicks, value):
+    layout_loss = copy.deepcopy(layout)
+    layout_loss['title'] = 'Loss Graph'
+    layout_loss['xaxis'] = {'title': 'Epochs'}
+    layout_loss['yaxis'] = {'title': 'Loss'}
+    layout_loss['autosize'] = False
+    layout_loss['height'] = '380'
+    layout_loss['width'] = '850'
+    layout_loss['margin'] = dict(l=0, r=0, b=20, t=0),
+    if value is None:
+        data = [
+            dict(
+                type="line",
+                # mode="markers",
+                x=[],
+                y=[],
+                # opacity=0,
+                hoverinfo="skip",
+            )]
+        figure = dict(data=data, layout=layout_loss)
+        return figure
+
+
 # Dash Functions
 
 # Historical Analysis
@@ -1754,6 +1778,14 @@ def update_sample_message_dash(n_clicks, value):
 def update_loss_accuracy_display_dash(value):
     display_loss, display_acc = update_loss_accuracy_display(value)
     return display_loss, display_acc
+
+
+@app.callback(Output('loss_graph', 'figure'),
+              [Input('submit_input', 'n_clicks')],
+              [State('input_text', 'value')])
+def update_loss_graph_dash(n_clicks, value):
+    figure = update_loss_graph(n_clicks, value)
+    return figure
 
 
 if __name__ == '__main__':

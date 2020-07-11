@@ -1470,21 +1470,21 @@ def update_batch_message(n_clicks, batch_input):
         try:
             batch_size = int(batch_input)
             if batch_size > 0:
-                return 'You have entered ' + str(batch_size) + ' batch-size.'
+                return 'Entered batch-size ' + str(batch_size)
             else:
                 return 'Please enter a value greater than 0'
         except:
             return 'Please enter an integer value'
 
 
-def update_sample_message(n_clicks, sample_message):
-    if sample_message is None or sample_message == '':
+def update_sample_message(n_clicks, sample_input):
+    if sample_input is None or sample_input == '':
         return 'Please enter an integer value'
     else:
         try:
-            epochs = int(sample_message)
-            if epochs > 0:
-                return 'You have entered ' + str(sample_message) + ' samples.'
+            samples = int(sample_input)
+            if samples > 0:
+                return 'Entered ' + str(sample_input) + ' samples.'
             else:
                 return 'Please enter a value greater than 0'
         except:
@@ -1499,6 +1499,29 @@ def update_loss_accuracy_display(value):
 
 
 def update_loss_graph(n_clicks, value):
+    layout_loss = copy.deepcopy(layout)
+    layout_loss['title'] = 'Loss Graph'
+    layout_loss['xaxis'] = {'title': 'Epochs'}
+    layout_loss['yaxis'] = {'title': 'Loss'}
+    layout_loss['autosize'] = False
+    layout_loss['height'] = '380'
+    layout_loss['width'] = '850'
+    layout_loss['margin'] = dict(l=0, r=0, b=20, t=0),
+    if value is None:
+        data = [
+            dict(
+                type="line",
+                # mode="markers",
+                x=[],
+                y=[],
+                # opacity=0,
+                hoverinfo="skip",
+            )]
+        figure = dict(data=data, layout=layout_loss)
+        return figure
+
+
+def update_acc_graph(n_clicks, value):
     layout_loss = copy.deepcopy(layout)
     layout_loss['title'] = 'Loss Graph'
     layout_loss['xaxis'] = {'title': 'Epochs'}
@@ -1759,14 +1782,14 @@ def update_epochs_message_dash(n_clicks, value):
 @app.callback(Output('batch_message', 'children'),
               [Input('submit_model', 'n_clicks')],
               [State('input_batch', 'value')])
-def update_epochs_message_dash(n_clicks, value):
-    message = update_epochs_message(n_clicks, value)
+def update_batch_message_dash(n_clicks, value):
+    message = update_batch_message(n_clicks, value)
     return message
 
 
 @app.callback(Output('sample_message', 'children'),
               [Input('submit_model', 'n_clicks')],
-              [State('input_batch', 'value')])
+              [State('input_sample', 'value')])
 def update_sample_message_dash(n_clicks, value):
     message = update_sample_message(n_clicks, value)
     return message
@@ -1786,6 +1809,15 @@ def update_loss_accuracy_display_dash(value):
 def update_loss_graph_dash(n_clicks, value):
     figure = update_loss_graph(n_clicks, value)
     return figure
+
+
+@app.callback(Output('acc_graph', 'figure'),
+              [Input('submit_input', 'n_clicks')],
+              [State('input_text', 'value')])
+def update_acc_graph_dash(n_clicks, value):
+    figure = update_acc_graph(n_clicks, value)
+    return figure
+
 
 
 if __name__ == '__main__':

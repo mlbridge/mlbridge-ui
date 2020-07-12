@@ -1629,6 +1629,21 @@ def update_confusion_matrix_validation(value):
         return figure
 
 
+def update_confusion_matrix_test(value):
+    layout_confusion = copy.deepcopy(layout_training_confusion)
+    layout_confusion['height'] = 230
+    if value is None or value == '':
+        figure = go.Figure(data=[go.Heatmap(
+            z=[[0, 100], [100, 0]],
+            x=['False', 'True'],
+            y=['True', 'False'],
+            text=[['FN', 'TP'], ['TN', 'FP']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(46,134,193)']],
+            hoverongaps=False)],
+            layout=layout_confusion)
+        return figure
+
+
 # Dash Functions
 
 # Historical Analysis
@@ -1921,6 +1936,13 @@ def update_confusion_matrix_validation_dash(n_clicks, value):
     figure = update_confusion_matrix_validation(value)
     return figure
 
+
+@app.callback(Output('confusion_test', 'figure'),
+              [Input('submit_model', 'n_clicks')],
+              [State('input_sample', 'value')])
+def update_confusion_matrix_test_dash(n_clicks, value):
+    figure = update_confusion_matrix_test(value)
+    return figure
 
 
 if __name__ == '__main__':

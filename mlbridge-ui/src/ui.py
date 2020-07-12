@@ -9,7 +9,7 @@ import copy
 from elasticsearch import Elasticsearch
 import numpy as np
 import json
-
+import plotly.graph_objs as go
 from urllib.request import urlopen
 
 es = Elasticsearch()
@@ -30,6 +30,14 @@ layout = dict(
                 # center=dict(lon=-78.05, lat=42.54),
                 zoom=2,
                 ),
+)
+
+layout_training_confusion = dict(
+    autosize=True,
+    margin=dict(l=0, r=0, b=6, t=30),
+    plot_bgcolor="#F9F9F9",
+    paper_bgcolor="#F9F9F9",
+
 )
 
 app.layout = html.Div(children=[
@@ -911,24 +919,31 @@ app.layout = html.Div(children=[
 
                 html.Div([
 
+                    html.P("Confusion Matrix: Training Data",
+                           style={'color': '#333',
+                                  'font-size': '18px',
+                                  'hover': 'center',
+                                  'margin-left': '30px'},
+                           className="control_label", ),
+
                     dcc.Graph(id='confusion_training')
 
                 ],
-                    className='pretty_container custom-training columns',),
+                    className='pretty_container custom-training columns', ),
 
                 html.Div([
 
                     dcc.Graph(id='confusion_validation')
 
                 ],
-                    className='pretty_container custom-training columns',),
+                    className='pretty_container custom-training columns', ),
 
                 html.Div([
 
                     dcc.Graph(id='confusion_test')
 
                 ],
-                    className='pretty_container custom-training columns',),
+                    className='pretty_container custom-training columns', ),
 
             ], className='row')
 
@@ -1570,6 +1585,21 @@ def update_acc_graph(n_clicks, value):
         return figure
 
 
+def update_confusion_matrix_training(value):
+    layout_confusion = copy.deepcopy(layout_training_confusion)
+    layout_confusion['height'] = 230
+    if value is None or value == '':
+        figure = go.Figure(data=[go.Heatmap(
+            z=[[0, 100], [100, 0]],
+            x=['False', 'True'],
+            y=['True', 'False'],
+            text=[['FN', 'TP'], ['TN', 'FP']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(46,134,193)']],
+            hoverongaps=False)],
+            layout=layout_confusion)
+        return figure
+
+
 # Dash Functions
 
 # Historical Analysis
@@ -1844,6 +1874,14 @@ def update_loss_graph_dash(n_clicks, value, n_intervals):
                Input('interval', 'n_intervals')])
 def update_acc_graph_dash(n_clicks, value, n_intervals):
     figure = update_acc_graph(n_clicks, value)
+    return figure
+
+
+@app.callback(Output('confusion_training', 'figure'),
+              [Input('submit_model', 'n_clicks')],
+              [State('input_sample', 'value')])
+def update_confusion_matrix_training_dash(n_clicks, value):
+    figure = update_confusion_matrix_training(value)
     return figure
 
 

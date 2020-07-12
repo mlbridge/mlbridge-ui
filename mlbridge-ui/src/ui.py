@@ -933,6 +933,13 @@ app.layout = html.Div(children=[
 
                 html.Div([
 
+                    html.P("Confusion Matrix: Validation Data",
+                           style={'color': '#333',
+                                  'font-size': '18px',
+                                  'hover': 'center',
+                                  'margin-left': '30px'},
+                           className="control_label", ),
+
                     dcc.Graph(id='confusion_validation')
 
                 ],

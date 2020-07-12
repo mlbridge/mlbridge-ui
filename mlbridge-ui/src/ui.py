@@ -767,11 +767,11 @@ app.layout = html.Div(children=[
                                 className="control_label"
                             ),
                             dcc.Input(
-                                placeholder='Enter Model Name',
+                                placeholder='Model Name',
                                 type='text',
                                 id='input_model',
                                 className='dcc_control',
-                                style={'width': '141px'}
+                                style={'width': '130px'}
                             ),
                         ]),
                         html.Div(id='input_model_message',
@@ -1804,17 +1804,19 @@ def update_loss_accuracy_display_dash(value):
 
 
 @app.callback(Output('loss_graph', 'figure'),
-              [Input('submit_input', 'n_clicks')],
-              [State('input_text', 'value')])
-def update_loss_graph_dash(n_clicks, value):
+              [Input('submit_input', 'n_clicks'),
+               Input('input_text', 'value'),
+               Input('interval', 'n_intervals')])
+def update_loss_graph_dash(n_clicks, value, n_intervals):
     figure = update_loss_graph(n_clicks, value)
     return figure
 
 
 @app.callback(Output('acc_graph', 'figure'),
-              [Input('submit_input', 'n_clicks')],
-              [State('input_text', 'value')])
-def update_acc_graph_dash(n_clicks, value):
+              [Input('submit_input', 'n_clicks'),
+               Input('input_text', 'value'),
+               Input('interval', 'n_intervals')])
+def update_acc_graph_dash(n_clicks, value, n_intervals):
     figure = update_acc_graph(n_clicks, value)
     return figure
 

@@ -107,6 +107,9 @@
     width: 100%;
     margin-left: 0;
   }
+  .custom-training.columns {
+    width: 31%;
+  }
 
   .one-third.column {
     width: 30.6666666667%;

@@ -9,6 +9,7 @@ import copy
 from elasticsearch import Elasticsearch
 import numpy as np
 import json
+
 from urllib.request import urlopen
 
 es = Elasticsearch()
@@ -903,6 +904,31 @@ app.layout = html.Div(children=[
                     )
 
                 ], className='pretty_container nine columns'),
+
+            ], className='row'),
+
+            html.Div([
+
+                html.Div([
+
+                    dcc.Graph(id='confusion_training')
+
+                ],
+                    className='pretty_container custom-training columns',),
+
+                html.Div([
+
+                    dcc.Graph(id='confusion_validation')
+
+                ],
+                    className='pretty_container custom-training columns',),
+
+                html.Div([
+
+                    dcc.Graph(id='confusion_test')
+
+                ],
+                    className='pretty_container custom-training columns',),
 
             ], className='row')
 
@@ -1819,7 +1845,6 @@ def update_loss_graph_dash(n_clicks, value, n_intervals):
 def update_acc_graph_dash(n_clicks, value, n_intervals):
     figure = update_acc_graph(n_clicks, value)
     return figure
-
 
 
 if __name__ == '__main__':

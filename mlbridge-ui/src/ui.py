@@ -959,7 +959,54 @@ app.layout = html.Div(children=[
                 ],
                     className='pretty_container custom-training columns', ),
 
-            ], className='row')
+            ], className='row'),
+
+
+            html.Div([
+
+                html.Div([
+
+                    html.P("Confusion Metrics: Training Data",
+                           style={'color': '#333',
+                                  'font-size': '18px',
+                                  'hover': 'center',
+                                  'margin-left': '30px'},
+                           className="control_label", ),
+
+                    dcc.Graph(id='confusion_met_training')
+
+                ],
+                    className='pretty_container custom-training columns', ),
+
+                html.Div([
+
+                    html.P("Confusion Metrics: Validation Data",
+                           style={'color': '#333',
+                                  'font-size': '18px',
+                                  'hover': 'center',
+                                  'margin-left': '30px'},
+                           className="control_label", ),
+
+                    dcc.Graph(id='confusion_met_validation')
+
+                ],
+                    className='pretty_container custom-training columns', ),
+
+                html.Div([
+
+                    html.P("Confusion Metrics: Test Data",
+                           style={'color': '#333',
+                                  'font-size': '18px',
+                                  'hover': 'center',
+                                  'margin-left': '30px'},
+                           className="control_label", ),
+
+                    dcc.Graph(id='confusion_met_test')
+
+                ],
+                    className='pretty_container custom-training columns', ),
+
+            ], className='row'),
 
         ], label='Training', value='machine_learning',
             className='pretty_container')

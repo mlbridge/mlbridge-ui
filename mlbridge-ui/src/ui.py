@@ -40,6 +40,14 @@ layout_training_confusion = dict(
 
 )
 
+layout_training_confusion_met = dict(
+    autosize=True,
+    margin=dict(l=30, r=0, b=30, t=30),
+    plot_bgcolor="#F9F9F9",
+    paper_bgcolor="#F9F9F9",
+
+)
+
 app.layout = html.Div(children=[
     dcc.Interval(
         id='interval',
@@ -961,7 +969,6 @@ app.layout = html.Div(children=[
 
             ], className='row'),
 
-
             html.Div([
 
                 html.Div([
@@ -1691,6 +1698,30 @@ def update_confusion_matrix_test(value):
         return figure
 
 
+def update_confusion_metrics_training(value):
+    layout_confusion = copy.deepcopy(layout_training_confusion_met)
+    layout_confusion['height'] = 200
+    if value is None:
+        x = ['Product A', 'Product B', 'Product C']
+        y = [20, 14, 23]
+
+        # Use textposition='auto' for direct text
+        animals = ['giraffes', 'orangutans', 'monkeys']
+
+        fig = go.Figure(data=[
+            go.Bar(name='Accuracy', x=['Score'], y=[0.5],
+                   marker_color='rgb(226,239,248)'),
+            go.Bar(name='Precision', x=['Score'], y=[0.5],
+                   marker_color='rgb(179,214,237)'),
+            go.Bar(name='Recall', x=['Score'], y=[0.5],
+                   marker_color='rgb(131,188,225)'),
+            go.Bar(name='F1 Score', x=['Score'], y=[0.5],
+                   marker_color='rgb(84,162,214)'),
+        ],
+        layout=layout_confusion)
+        return fig
+
+
 # Dash Functions
 
 # Historical Analysis
@@ -1989,6 +2020,14 @@ def update_confusion_matrix_validation_dash(n_clicks, value):
               [State('input_sample', 'value')])
 def update_confusion_matrix_test_dash(n_clicks, value):
     figure = update_confusion_matrix_test(value)
+    return figure
+
+
+@app.callback(Output('confusion_met_training', 'figure'),
+              [Input('submit_model', 'n_clicks')],
+              [State('input_sample', 'value')])
+def update_confusion_metrics_training_dash(n_clicks, value):
+    figure = update_confusion_metrics_training(value)
     return figure
 
 

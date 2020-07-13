@@ -1734,6 +1734,24 @@ def update_confusion_metrics_validation(value):
         return figure
 
 
+def update_confusion_metrics_test(value):
+    layout_confusion = copy.deepcopy(layout_training_confusion_met)
+    layout_confusion['height'] = 200
+    if value is None:
+        figure = go.Figure(data=[
+            go.Bar(name='Accuracy', x=['Score'], y=[0.5],
+                   marker_color='rgb(226,239,248)'),
+            go.Bar(name='Precision', x=['Score'], y=[0.5],
+                   marker_color='rgb(179,214,237)'),
+            go.Bar(name='Recall', x=['Score'], y=[0.5],
+                   marker_color='rgb(131,188,225)'),
+            go.Bar(name='F1 Score', x=['Score'], y=[0.5],
+                   marker_color='rgb(84,162,214)'),
+        ],
+            layout=layout_confusion)
+        return figure
+
+
 # Dash Functions
 
 # Historical Analysis
@@ -2048,6 +2066,14 @@ def update_confusion_metrics_training_dash(n_clicks, value):
               [State('input_sample', 'value')])
 def update_confusion_metrics_validation_dash(n_clicks, value):
     figure = update_confusion_metrics_validation(value)
+    return figure
+
+
+@app.callback(Output('confusion_met_test', 'figure'),
+              [Input('submit_model', 'n_clicks')],
+              [State('input_sample', 'value')])
+def update_confusion_metrics_test_dash(n_clicks, value):
+    figure = update_confusion_metrics_test(value)
     return figure
 
 

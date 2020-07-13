@@ -1662,7 +1662,7 @@ def update_confusion_matrix_training(value):
             x=['False', 'True'],
             y=['True', 'False'],
             text=[['FN', 'TP'], ['TN', 'FP']],
-            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(46,134,193)']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
             hoverongaps=False)],
             layout=layout_confusion)
         return figure
@@ -1677,7 +1677,7 @@ def update_confusion_matrix_validation(value):
             x=['False', 'True'],
             y=['True', 'False'],
             text=[['FN', 'TP'], ['TN', 'FP']],
-            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(46,134,193)']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
             hoverongaps=False)],
             layout=layout_confusion)
         return figure
@@ -1692,7 +1692,7 @@ def update_confusion_matrix_test(value):
             x=['False', 'True'],
             y=['True', 'False'],
             text=[['FN', 'TP'], ['TN', 'FP']],
-            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(46,134,193)']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
             hoverongaps=False)],
             layout=layout_confusion)
         return figure

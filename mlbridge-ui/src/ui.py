@@ -1702,13 +1702,7 @@ def update_confusion_metrics_training(value):
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
     if value is None:
-        x = ['Product A', 'Product B', 'Product C']
-        y = [20, 14, 23]
-
-        # Use textposition='auto' for direct text
-        animals = ['giraffes', 'orangutans', 'monkeys']
-
-        fig = go.Figure(data=[
+        figure = go.Figure(data=[
             go.Bar(name='Accuracy', x=['Score'], y=[0.5],
                    marker_color='rgb(226,239,248)'),
             go.Bar(name='Precision', x=['Score'], y=[0.5],
@@ -1718,8 +1712,8 @@ def update_confusion_metrics_training(value):
             go.Bar(name='F1 Score', x=['Score'], y=[0.5],
                    marker_color='rgb(84,162,214)'),
         ],
-        layout=layout_confusion)
-        return fig
+            layout=layout_confusion)
+        return figure
 
 
 # Dash Functions

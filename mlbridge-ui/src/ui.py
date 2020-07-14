@@ -1615,7 +1615,7 @@ def update_loss_graph(n_clicks, value):
     layout_loss = copy.deepcopy(layout)
     layout_loss['title'] = 'Loss Graph'
     layout_loss['xaxis'] = {'title': 'Epochs'}
-    layout_loss['yaxis'] = {'title': 'Loss'}
+    layout_loss['yaxis'] = {'title': 'Loss %'}
     layout_loss['autosize'] = False
     layout_loss['height'] = '400'
     layout_loss['width'] = '850'
@@ -1623,22 +1623,33 @@ def update_loss_graph(n_clicks, value):
     if value is None:
         data = [
             dict(
+                name='Training',
                 type="line",
                 # mode="markers",
-                x=[],
-                y=[],
+                x=[1, 2, 3, 4, 5],
+                y=[15, 10, 6, 3, 1],
                 # opacity=0,
                 hoverinfo="skip",
-            )]
+            ),
+            dict(
+                name='Validation',
+                type="line",
+                # mode="markers",
+                x=[1, 2, 3, 4, 5],
+                y=[17, 11, 8, 4, 3],
+                # opacity=0,
+                hoverinfo="skip",
+            ),
+        ]
         figure = dict(data=data, layout=layout_loss)
         return figure
 
 
 def update_acc_graph(n_clicks, value):
     layout_loss = copy.deepcopy(layout)
-    layout_loss['title'] = 'Loss Graph'
+    layout_loss['title'] = 'Accuracy Graph'
     layout_loss['xaxis'] = {'title': 'Epochs'}
-    layout_loss['yaxis'] = {'title': 'Loss'}
+    layout_loss['yaxis'] = {'title': 'Accuracy %'}
     layout_loss['autosize'] = False
     layout_loss['height'] = '400'
     layout_loss['width'] = '850'
@@ -1646,13 +1657,24 @@ def update_acc_graph(n_clicks, value):
     if value is None:
         data = [
             dict(
+                name='Training',
                 type="line",
                 # mode="markers",
-                x=[],
-                y=[],
+                x=[1, 2, 3, 4, 5],
+                y=[20, 60, 80, 83, 85],
                 # opacity=0,
                 hoverinfo="skip",
-            )]
+            ),
+            dict(
+                name='Validation',
+                type="line",
+                # mode="markers",
+                x=[1, 2, 3, 4, 5],
+                y=[10, 35, 60 , 72, 76],
+                # opacity=0,
+                hoverinfo="skip",
+            ),
+        ]
         figure = dict(data=data, layout=layout_loss)
         return figure
 

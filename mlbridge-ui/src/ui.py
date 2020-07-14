@@ -1617,7 +1617,7 @@ def update_loss_graph(n_clicks, value):
     layout_loss['xaxis'] = {'title': 'Epochs'}
     layout_loss['yaxis'] = {'title': 'Loss'}
     layout_loss['autosize'] = False
-    layout_loss['height'] = '380'
+    layout_loss['height'] = '400'
     layout_loss['width'] = '850'
     layout_loss['margin'] = dict(l=0, r=0, b=20, t=0),
     if value is None:
@@ -1640,7 +1640,7 @@ def update_acc_graph(n_clicks, value):
     layout_loss['xaxis'] = {'title': 'Epochs'}
     layout_loss['yaxis'] = {'title': 'Loss'}
     layout_loss['autosize'] = False
-    layout_loss['height'] = '380'
+    layout_loss['height'] = '400'
     layout_loss['width'] = '850'
     layout_loss['margin'] = dict(l=0, r=0, b=20, t=0),
     if value is None:

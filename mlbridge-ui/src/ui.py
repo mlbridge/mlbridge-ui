@@ -1753,6 +1753,8 @@ def update_confusion_metrics_test(value):
                    marker_color='rgb(84,162,214)'),
         ],
             layout=layout_confusion)
+        figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
+                                          autorange=False)
         return figure
 
 

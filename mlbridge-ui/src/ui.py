@@ -1550,6 +1550,10 @@ def update_blacklist_vet_table(n_intervals):
 
 # Training
 
+def update_input_model_message(value):
+    if value is None or value == '':
+        return 'Please enter a model name'
+
 
 def update_display_training_options(value):
     if value is None or value == 'load':
@@ -1977,6 +1981,14 @@ def update_blacklist_vet_table_dash(n_intervals):
 
 
 # Training
+
+@app.callback(Output('input_model_message', 'children'),
+              [Input('submit_model', 'n_clicks')],
+              [State('input_epochs', 'value')])
+def update_input_model_message_dash(n_clicks, value):
+    message = update_input_model_message(value)
+    return message
+
 
 @app.callback(Output('training_options', 'style'),
               [Input('model_option', 'value')])

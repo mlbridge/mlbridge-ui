@@ -54,11 +54,50 @@ app.layout = html.Div(children=[
         interval=5 * 1000,  # in milliseconds
         n_intervals=0
     ),
-    html.H1(children='Malicious Domain Name Analysis',
-            style={
-                'textAlign': 'center',
-                'color': '#2e86c1'
-            }),
+    html.Div(
+        [
+            html.Div(
+                [
+                    html.Img(
+                        src=app.get_asset_url("dash-logo.png"),
+                        id="plotly-image",
+                        style={
+                            "height": "100px",
+                            "width": "auto",
+                            "margin-bottom": "25px",
+                        },
+                    )
+                ],
+                className="one-third column",
+            ),
+            html.Div(
+                [
+                    html.Div(
+                        [
+                            html.H1(
+                                "Domain Name Cyber Security",
+                            ),
+                        ]
+                    )
+                ],
+                className="one-half column",
+                id="title",
+            ),
+            html.Div(
+                [
+                    html.A(
+                        html.Button("Learn More", id="learn-more-button"),
+                        href="https://github.com/mlbridge",
+                    )
+                ],
+                className="one-third column",
+                id="button",
+            ),
+        ],
+        id="header",
+        className="row flex-display",
+        style={"margin-bottom": "25px"},
+    ),
     dcc.Tabs(id="", value='historical_analysis', children=[
         dcc.Tab([
             html.Div(

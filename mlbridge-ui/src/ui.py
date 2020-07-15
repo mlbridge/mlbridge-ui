@@ -59,10 +59,10 @@ app.layout = html.Div(children=[
             html.Div(
                 [
                     html.Img(
-                        src=app.get_asset_url("dash-logo.png"),
+                        src=app.get_asset_url("mlbridge-logo.png"),
                         id="plotly-image",
                         style={
-                            "height": "100px",
+                            "height": "70px",
                             "width": "auto",
                             "margin-bottom": "25px",
                         },

@@ -11,6 +11,7 @@ import numpy as np
 import json
 import plotly.graph_objs as go
 from urllib.request import urlopen
+import glob
 
 es = Elasticsearch()
 
@@ -1589,9 +1590,25 @@ def update_blacklist_vet_table(n_intervals):
 
 # Training
 
-def update_input_model_message(value):
-    if value is None or value == '':
+def update_input_model_message(value, option):
+    if (value is None or value == '') and (option == '' or option is None):
         return 'Please enter a model name'
+    else:
+        if option == 'load':
+            models = \
+                glob.glob('../../../mlbridge-machine-learning/saved_models/*.hdf5')
+            for i in models:
+                name = i.replace('\\', '/')
+                name = name.split('/')
+                name.reverse()
+                if value == name[0].split('.')[0]:
+                    return 'Model Loaded'
+                else:
+                    return 'Model does not exist'
+        elif option == 'training':
+            return 'Training the model'
+        elif option is None or option == '':
+            return 'Please select an option'
 
 
 def update_display_training_options(value):
@@ -1709,7 +1726,7 @@ def update_acc_graph(n_clicks, value):
                 type="line",
                 # mode="markers",
                 x=[1, 2, 3, 4, 5],
-                y=[10, 35, 60 , 72, 76],
+                y=[10, 35, 60, 72, 76],
                 # opacity=0,
                 hoverinfo="skip",
             ),
@@ -2045,9 +2062,10 @@ def update_blacklist_vet_table_dash(n_intervals):
 
 @app.callback(Output('input_model_message', 'children'),
               [Input('submit_model', 'n_clicks')],
-              [State('input_epochs', 'value')])
-def update_input_model_message_dash(n_clicks, value):
-    message = update_input_model_message(value)
+              [State('model_option', 'value'),
+               State('input_model', 'value')])
+def update_input_model_message_dash(n_clicks, option, value):
+    message = update_input_model_message(value, option)
     return message
 
 

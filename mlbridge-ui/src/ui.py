@@ -15,7 +15,8 @@ import glob
 
 es = Elasticsearch()
 
-es.index(index='model', id=1, body={'name': '', 'training': 0, 'load': 0})
+es.index(index='model', id=1, body={'name': '', 'training': 0, 'load': 0,
+                                    'batch': 0, 'epochs': 0, 'samples': 0})
 
 app = dash.Dash(__name__)
 
@@ -1605,14 +1606,19 @@ def update_input_model_message(value, option):
                 name.reverse()
                 if value == name[0].split('.')[0]:
                     update_body = {'doc': {'name': value,
-                                           'training': 0, 'load': 1}}
-                    es.update(index='model', id=1, body=update_body)
-                    return 'Model Loaded'
+                                           'training': 0, 'load': 1, 'batch': 0,
+                                           'epochs': 0, 'samples': 0}}
+                    try:
+                        es.update(index='model', id=1, body=update_body)
+                        return 'Model Loaded'
+                    except:
+                        return 'Model Loaded'
                 else:
                     return 'Model does not exist'
         elif option == 'training':
             update_body = {'doc': {'name': value,
-                                   'training': 1, 'load': 0}}
+                                   'training': 1, 'load': 0,
+                                   'batch': 0, 'epochs': 0, 'samples': 0}}
             es.update(index='model', id=1, body=update_body)
             return 'Training the model'
         elif option is None or option == '':

@@ -1593,9 +1593,25 @@ def update_blacklist_vet_table(n_intervals):
 
 # Training
 
-def update_input_model_message(value, option):
-    if (value is None or value == '') and (option == '' or option is None):
-        return 'Please enter a model name'
+def update_input_model_message(model_name, option):
+    model_message = 'Please enter a model name'
+    epochs_message = 'Please enter an integer value'
+    batch_message = 'Please enter an integer value'
+    sample_message = 'Please enter an integer value'
+    model_check, option_check = False, False
+    epochs_check, batch_check, sample_check = False, False, False
+
+    if (model_name is not None) and (model_name != ''):
+        model_check = True
+    if option is not None:
+        option_check = True
+
+    if (not model_check) and (not option_check):
+        model_message = 'Enter model name and option'
+    elif model_check and (not option_check):
+        model_message = 'Please enter an option'
+    elif (not model_check) and option_check:
+        model_message = 'Please enter a model name'
     else:
         if option == 'load':
             models = \
@@ -1604,8 +1620,8 @@ def update_input_model_message(value, option):
                 name = i.replace('\\', '/')
                 name = name.split('/')
                 name.reverse()
-                if value == name[0].split('.')[0]:
-                    update_body = {'doc': {'name': value,
+                if model_name == name[0].split('.')[0]:
+                    update_body = {'doc': {'name': model_name,
                                            'training': 0, 'load': 1, 'batch': 0,
                                            'epochs': 0, 'samples': 0}}
                     try:
@@ -1616,13 +1632,14 @@ def update_input_model_message(value, option):
                 else:
                     return 'Model does not exist'
         elif option == 'training':
-            update_body = {'doc': {'name': value,
+            update_body = {'doc': {'name': model_name,
                                    'training': 1, 'load': 0,
                                    'batch': 0, 'epochs': 0, 'samples': 0}}
             es.update(index='model', id=1, body=update_body)
             return 'Training the model'
         elif option is None or option == '':
             return 'Please select an option'
+    return model_message
 
 
 def update_display_training_options(value):

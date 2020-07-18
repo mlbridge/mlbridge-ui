@@ -1593,7 +1593,7 @@ def update_blacklist_vet_table(n_intervals):
 
 # Training
 
-def update_input_model_message(model_name, option):
+def update_es_parameters_and_messages(model_name, option):
     model_message = 'Please enter a model name'
     epochs_message = 'Please enter an integer value'
     batch_message = 'Please enter an integer value'
@@ -2095,8 +2095,8 @@ def update_blacklist_vet_table_dash(n_intervals):
               [Input('submit_model', 'n_clicks')],
               [State('model_option', 'value'),
                State('input_model', 'value')])
-def update_input_model_message_dash(n_clicks, option, value):
-    message = update_input_model_message(value, option)
+def update_es_parameters_and_messages_dash(n_clicks, option, value):
+    message = update_es_parameters_and_messages(value, option)
     return message
 
 

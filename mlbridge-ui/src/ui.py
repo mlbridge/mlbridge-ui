@@ -1652,10 +1652,10 @@ def update_es_parameters_and_messages(model_name, option, epochs_input,
                 batch_message = 'Please enter an integer value'
             else:
                 try:
-                    batchs = int(batch_input)
-                    if batchs > 0:
+                    batch = int(batch_input)
+                    if batch > 0:
                         batch_check = True
-                        batch_message = 'Entered batch-size ' + str(batchs)
+                        batch_message = 'Entered batch-size ' + str(batch)
                     else:
                         batch_message = 'Please enter a value greater than 0'
                 except:
@@ -1678,7 +1678,7 @@ def update_es_parameters_and_messages(model_name, option, epochs_input,
                 try:
                     update_body = {'doc': {'name': model_name,
                                            'training': 1, 'load': 0,
-                                           'batch': batchs, 'epochs': epochs,
+                                           'batch': batch, 'epochs': epochs,
                                            'samples': samples}}
                     es.update(index='model', id=1, body=update_body)
                     model_message = 'Training the model'

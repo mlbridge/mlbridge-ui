@@ -1593,7 +1593,8 @@ def update_blacklist_vet_table(n_intervals):
 
 # Training
 
-def update_es_parameters_and_messages(model_name, option):
+def update_es_parameters_and_messages(model_name, option, epochs_input,
+                                      batch_input, sample_input):
     model_message = 'Please enter a model name'
     epochs_message = 'Please enter an integer value'
     batch_message = 'Please enter an integer value'
@@ -1631,14 +1632,58 @@ def update_es_parameters_and_messages(model_name, option):
                         return 'Model Loaded'
                 else:
                     return 'Model does not exist'
+
         elif option == 'training':
-            update_body = {'doc': {'name': model_name,
-                                   'training': 1, 'load': 0,
-                                   'batch': 0, 'epochs': 0, 'samples': 0}}
-            es.update(index='model', id=1, body=update_body)
-            return 'Training the model'
-        elif option is None or option == '':
-            return 'Please select an option'
+
+            if (epochs_input is not None) and (epochs_input != ''):
+                epochs_message = 'Please enter an integer value'
+            else:
+                try:
+                    epochs = int(epochs_input)
+                    if epochs > 0:
+                        epochs_check = True
+                        epochs_message = 'You have entered ' + str(epochs) + ' epochs'
+                    else:
+                        epochs_message = 'Please enter a value greater than 0'
+                except:
+                    epochs_message = 'Please enter an integer value'
+
+            if (batch_input is not None) and (batch_input != ''):
+                batch_message = 'Please enter an integer value'
+            else:
+                try:
+                    batchs = int(batch_input)
+                    if batchs > 0:
+                        batch_check = True
+                        batch_message = 'Entered batch-size ' + str(batchs)
+                    else:
+                        batch_message = 'Please enter a value greater than 0'
+                except:
+                    batch_message = 'Please enter an integer value'
+
+            if (sample_input is not None) and (sample_input != ''):
+                sample_message = 'Please enter an integer value'
+            else:
+                try:
+                    samples = int(sample_input)
+                    if samples > 0:
+                        sample_check = True
+                        sample_message = 'Entered ' + str(sample_input) + ' samples'
+                    else:
+                        sample_message = 'Please enter a value greater than 0'
+                except:
+                    sample_message = 'Please enter an integer value'
+
+            if epochs_check and batch_check and sample_check:
+                try:
+                    update_body = {'doc': {'name': model_name,
+                                           'training': 1, 'load': 0,
+                                           'batch': batchs, 'epochs': epochs,
+                                           'samples': samples}}
+                    es.update(index='model', id=1, body=update_body)
+                    model_message = 'Training the model'
+                except:
+                    model_message = 'Training the model'
     return model_message
 
 

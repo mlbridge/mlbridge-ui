@@ -1627,15 +1627,15 @@ def update_es_parameters_and_messages(model_name, option, epochs_input,
                                            'epochs': 0, 'samples': 0}}
                     try:
                         es.update(index='model', id=1, body=update_body)
-                        return 'Model Loaded'
+                        model_message = 'Model Loaded'
                     except:
-                        return 'Model Loaded'
+                        model_message = 'Model Loaded'
                 else:
-                    return 'Model does not exist'
+                    model_message = 'Model does not exist'
 
         elif option == 'training':
 
-            if (epochs_input is not None) and (epochs_input != ''):
+            if (epochs_input is None) or (epochs_input == ''):
                 epochs_message = 'Please enter an integer value'
             else:
                 try:
@@ -1648,7 +1648,7 @@ def update_es_parameters_and_messages(model_name, option, epochs_input,
                 except:
                     epochs_message = 'Please enter an integer value'
 
-            if (batch_input is not None) and (batch_input != ''):
+            if (batch_input is None) or (batch_input == ''):
                 batch_message = 'Please enter an integer value'
             else:
                 try:
@@ -1661,7 +1661,7 @@ def update_es_parameters_and_messages(model_name, option, epochs_input,
                 except:
                     batch_message = 'Please enter an integer value'
 
-            if (sample_input is not None) and (sample_input != ''):
+            if (sample_input is None) and (sample_input == ''):
                 sample_message = 'Please enter an integer value'
             else:
                 try:
@@ -1684,7 +1684,7 @@ def update_es_parameters_and_messages(model_name, option, epochs_input,
                     model_message = 'Training the model'
                 except:
                     model_message = 'Training the model'
-    return model_message
+    return model_message, epochs_message, batch_message, sample_message
 
 
 def update_display_training_options(value):
@@ -2136,13 +2136,23 @@ def update_blacklist_vet_table_dash(n_intervals):
 
 # Training
 
-@app.callback(Output('input_model_message', 'children'),
+@app.callback([Output('input_model_message', 'children'),
+               Output('epoch_message', 'children'),
+               Output('batch_message', 'children'),
+               Output('sample_message', 'children')],
               [Input('submit_model', 'n_clicks')],
               [State('model_option', 'value'),
-               State('input_model', 'value')])
-def update_es_parameters_and_messages_dash(n_clicks, option, value):
-    message = update_es_parameters_and_messages(value, option)
-    return message
+               State('input_model', 'value'),
+               State('input_epochs', 'value'),
+               State('input_batch', 'value'),
+               State('input_sample', 'value')])
+def update_es_parameters_and_messages_dash(n_clicks, option, model, epochs,
+                                           batch, samples):
+
+    model_message, epochs_message, batch_message, samples_message \
+        = update_es_parameters_and_messages(model, option, epochs, batch, samples)
+
+    return model_message, epochs_message, batch_message, samples_message
 
 
 @app.callback(Output('training_options', 'style'),
@@ -2152,28 +2162,28 @@ def update_display_training_options_dash(value):
     return display
 
 
-@app.callback(Output('epoch_message', 'children'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_epochs', 'value')])
-def update_epochs_message_dash(n_clicks, value):
-    message = update_epochs_message(n_clicks, value)
-    return message
-
-
-@app.callback(Output('batch_message', 'children'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_batch', 'value')])
-def update_batch_message_dash(n_clicks, value):
-    message = update_batch_message(n_clicks, value)
-    return message
-
-
-@app.callback(Output('sample_message', 'children'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_sample', 'value')])
-def update_sample_message_dash(n_clicks, value):
-    message = update_sample_message(n_clicks, value)
-    return message
+# @app.callback(Output('epoch_message', 'children'),
+#               [Input('submit_model', 'n_clicks')],
+#               [State('input_epochs', 'value')])
+# def update_epochs_message_dash(n_clicks, value):
+#     message = update_epochs_message(n_clicks, value)
+#     return message
+#
+#
+# @app.callback(Output('batch_message', 'children'),
+#               [Input('submit_model', 'n_clicks')],
+#               [State('input_batch', 'value')])
+# def update_batch_message_dash(n_clicks, value):
+#     message = update_batch_message(n_clicks, value)
+#     return message
+#
+#
+# @app.callback(Output('sample_message', 'children'),
+#               [Input('submit_model', 'n_clicks')],
+#               [State('input_sample', 'value')])
+# def update_sample_message_dash(n_clicks, value):
+#     message = update_sample_message(n_clicks, value)
+#     return message
 
 
 @app.callback([Output('loss_graph', 'style'),

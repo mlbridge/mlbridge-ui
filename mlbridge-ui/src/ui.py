@@ -1683,7 +1683,8 @@ def update_es_parameters_and_messages(model_name, option, epochs_input,
                     es.update(index='model', id=1, body=update_body)
                     model_message = 'Training the model'
                 except:
-                    model_message = 'Training the model'
+                    model_message = 'Issue with Elasticsearch'
+
     return model_message, epochs_message, batch_message, sample_message
 
 
@@ -1692,48 +1693,6 @@ def update_display_training_options(value):
         return {'display': 'none'}
     else:
         return {'display': 'unset'}
-
-
-def update_epochs_message(n_clicks, epochs_input):
-    if epochs_input is None or epochs_input == '':
-        return 'Please enter an integer value'
-    else:
-        try:
-            epochs = int(epochs_input)
-            if epochs > 0:
-                return 'You have entered ' + str(epochs) + ' epochs.'
-            else:
-                return 'Please enter a value greater than 0'
-        except:
-            return 'Please enter an integer value'
-
-
-def update_batch_message(n_clicks, batch_input):
-    if batch_input is None or batch_input == '':
-        return 'Please enter an integer value'
-    else:
-        try:
-            batch_size = int(batch_input)
-            if batch_size > 0:
-                return 'Entered batch-size ' + str(batch_size)
-            else:
-                return 'Please enter a value greater than 0'
-        except:
-            return 'Please enter an integer value'
-
-
-def update_sample_message(n_clicks, sample_input):
-    if sample_input is None or sample_input == '':
-        return 'Please enter an integer value'
-    else:
-        try:
-            samples = int(sample_input)
-            if samples > 0:
-                return 'Entered ' + str(sample_input) + ' samples.'
-            else:
-                return 'Please enter a value greater than 0'
-        except:
-            return 'Please enter an integer value'
 
 
 def update_loss_accuracy_display(value):
@@ -2151,7 +2110,6 @@ def update_es_parameters_and_messages_dash(n_clicks, option, model, epochs,
 
     model_message, epochs_message, batch_message, samples_message \
         = update_es_parameters_and_messages(model, option, epochs, batch, samples)
-
     return model_message, epochs_message, batch_message, samples_message
 
 
@@ -2160,30 +2118,6 @@ def update_es_parameters_and_messages_dash(n_clicks, option, model, epochs,
 def update_display_training_options_dash(value):
     display = update_display_training_options(value)
     return display
-
-
-# @app.callback(Output('epoch_message', 'children'),
-#               [Input('submit_model', 'n_clicks')],
-#               [State('input_epochs', 'value')])
-# def update_epochs_message_dash(n_clicks, value):
-#     message = update_epochs_message(n_clicks, value)
-#     return message
-#
-#
-# @app.callback(Output('batch_message', 'children'),
-#               [Input('submit_model', 'n_clicks')],
-#               [State('input_batch', 'value')])
-# def update_batch_message_dash(n_clicks, value):
-#     message = update_batch_message(n_clicks, value)
-#     return message
-#
-#
-# @app.callback(Output('sample_message', 'children'),
-#               [Input('submit_model', 'n_clicks')],
-#               [State('input_sample', 'value')])
-# def update_sample_message_dash(n_clicks, value):
-#     message = update_sample_message(n_clicks, value)
-#     return message
 
 
 @app.callback([Output('loss_graph', 'style'),

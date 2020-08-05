@@ -2147,49 +2147,55 @@ def update_acc_graph_dash(n_clicks, value, n_intervals):
 
 
 @app.callback(Output('confusion_training', 'figure'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_sample', 'value')])
-def update_confusion_matrix_training_dash(n_clicks, value):
+              [Input('submit_model', 'n_clicks'),
+               Input('input_text', 'value'),
+               Input('interval', 'n_intervals')])
+def update_confusion_matrix_training_dash(n_clicks, value, n_intervals):
     figure = update_confusion_matrix_training(value)
     return figure
 
 
 @app.callback(Output('confusion_validation', 'figure'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_sample', 'value')])
-def update_confusion_matrix_validation_dash(n_clicks, value):
+              [Input('submit_model', 'n_clicks'),
+               Input('input_text', 'value'),
+               Input('interval', 'n_intervals')])
+def update_confusion_matrix_validation_dash(n_clicks, value, n_intervals):
     figure = update_confusion_matrix_validation(value)
     return figure
 
 
 @app.callback(Output('confusion_test', 'figure'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_sample', 'value')])
-def update_confusion_matrix_test_dash(n_clicks, value):
+              [Input('submit_model', 'n_clicks'),
+               Input('input_text', 'value'),
+               Input('interval', 'n_intervals')])
+def update_confusion_matrix_test_dash(n_clicks, value, n_intervals):
     figure = update_confusion_matrix_test(value)
     return figure
 
 
 @app.callback(Output('confusion_met_training', 'figure'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_sample', 'value')])
-def update_confusion_metrics_training_dash(n_clicks, value):
+              [Input('submit_model', 'n_clicks'),
+               Input('input_text', 'value'),
+               Input('interval', 'n_intervals')])
+def update_confusion_metrics_training_dash(n_clicks, value, n_intervals):
     figure = update_confusion_metrics_training(value)
     return figure
 
 
 @app.callback(Output('confusion_met_validation', 'figure'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_sample', 'value')])
-def update_confusion_metrics_validation_dash(n_clicks, value):
+              [Input('submit_model', 'n_clicks'),
+               Input('input_text', 'value'),
+               Input('interval', 'n_intervals')])
+def update_confusion_metrics_validation_dash(n_clicks, value, n_intervals):
     figure = update_confusion_metrics_validation(value)
     return figure
 
 
 @app.callback(Output('confusion_met_test', 'figure'),
-              [Input('submit_model', 'n_clicks')],
-              [State('input_sample', 'value')])
-def update_confusion_metrics_test_dash(n_clicks, value):
+              [Input('submit_model', 'n_clicks'),
+               Input('input_text', 'value'),
+               Input('interval', 'n_intervals')])
+def update_confusion_metrics_test_dash(n_clicks, value, n_intervals):
     figure = update_confusion_metrics_test(value)
     return figure
 

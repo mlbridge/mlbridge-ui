@@ -15,8 +15,11 @@ import glob
 
 es = Elasticsearch()
 
-es.index(index='model', id=1, body={'name': '', 'training': 0, 'load': 0,
-                                    'batch': 0, 'epochs': 0, 'samples': 0})
+try:
+    es.index(index='model', id=1, body={'name': '', 'training': 0, 'load': 0,
+                                        'batch': 0, 'epochs': 0, 'samples': 0})
+except:
+    print('Please check the Elasticsearch Server')
 
 app = dash.Dash(__name__)
 
@@ -1711,7 +1714,9 @@ def update_loss_graph(n_clicks, value):
     layout_loss['height'] = '400'
     layout_loss['width'] = '850'
     layout_loss['margin'] = dict(l=0, r=0, b=20, t=0),
-    if value is None:
+    if value is None or \
+            (es.get(index='model', id=1)['_source']['training'] == 0
+             and es.get(index='model', id=1)['_source']['load'] == 0):
         data = [
             dict(
                 name='Training',
@@ -1745,7 +1750,9 @@ def update_acc_graph(n_clicks, value):
     layout_loss['height'] = '400'
     layout_loss['width'] = '850'
     layout_loss['margin'] = dict(l=0, r=0, b=20, t=0),
-    if value is None:
+    if value is None or \
+            (es.get(index='model', id=1)['_source']['training'] == 0
+             and es.get(index='model', id=1)['_source']['load'] == 0):
         data = [
             dict(
                 name='Training',
@@ -1773,7 +1780,9 @@ def update_acc_graph(n_clicks, value):
 def update_confusion_matrix_training(value):
     layout_confusion = copy.deepcopy(layout_training_confusion)
     layout_confusion['height'] = 230
-    if value is None or value == '':
+    if value is None or \
+            (es.get(index='model', id=1)['_source']['training'] == 0
+             and es.get(index='model', id=1)['_source']['load'] == 0):
         figure = go.Figure(data=[go.Heatmap(
             z=[[0, 100], [100, 0]],
             x=['False', 'True'],
@@ -1788,7 +1797,9 @@ def update_confusion_matrix_training(value):
 def update_confusion_matrix_validation(value):
     layout_confusion = copy.deepcopy(layout_training_confusion)
     layout_confusion['height'] = 230
-    if value is None or value == '':
+    if value is None or \
+            (es.get(index='model', id=1)['_source']['training'] == 0
+             and es.get(index='model', id=1)['_source']['load'] == 0):
         figure = go.Figure(data=[go.Heatmap(
             z=[[0, 100], [100, 0]],
             x=['False', 'True'],
@@ -1803,7 +1814,9 @@ def update_confusion_matrix_validation(value):
 def update_confusion_matrix_test(value):
     layout_confusion = copy.deepcopy(layout_training_confusion)
     layout_confusion['height'] = 230
-    if value is None or value == '':
+    if value is None or \
+            (es.get(index='model', id=1)['_source']['training'] == 0
+             and es.get(index='model', id=1)['_source']['load'] == 0):
         figure = go.Figure(data=[go.Heatmap(
             z=[[0, 100], [100, 0]],
             x=['False', 'True'],
@@ -1818,7 +1831,9 @@ def update_confusion_matrix_test(value):
 def update_confusion_metrics_training(value):
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
-    if value is None:
+    if value is None or \
+            (es.get(index='model', id=1)['_source']['training'] == 0
+             and es.get(index='model', id=1)['_source']['load'] == 0):
         figure = go.Figure(data=[
             go.Bar(name='Accuracy', x=['Score'], y=[0.5],
                    marker_color='rgb(226,239,248)'),
@@ -1838,7 +1853,9 @@ def update_confusion_metrics_training(value):
 def update_confusion_metrics_validation(value):
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
-    if value is None:
+    if value is None or \
+            (es.get(index='model', id=1)['_source']['training'] == 0
+             and es.get(index='model', id=1)['_source']['load'] == 0):
         figure = go.Figure(data=[
             go.Bar(name='Accuracy', x=['Score'], y=[0.5],
                    marker_color='rgb(226,239,248)'),
@@ -1858,7 +1875,9 @@ def update_confusion_metrics_validation(value):
 def update_confusion_metrics_test(value):
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
-    if value is None:
+    if value is None or \
+            (es.get(index='model', id=1)['_source']['training'] == 0
+             and es.get(index='model', id=1)['_source']['load'] == 0):
         figure = go.Figure(data=[
             go.Bar(name='Accuracy', x=['Score'], y=[0.5],
                    marker_color='rgb(226,239,248)'),
@@ -2107,7 +2126,6 @@ def update_blacklist_vet_table_dash(n_intervals):
                State('input_sample', 'value')])
 def update_es_parameters_and_messages_dash(n_clicks, option, model, epochs,
                                            batch, samples):
-
     model_message, epochs_message, batch_message, samples_message \
         = update_es_parameters_and_messages(model, option, epochs, batch, samples)
     return model_message, epochs_message, batch_message, samples_message

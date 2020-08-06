@@ -1718,14 +1718,13 @@ def update_loss_graph(n_clicks, value):
     if (es.get(index='model', id=1)['_source']['training'] == 0) \
             and (es.get(index='model', id=1)['_source']['load'] == 0) \
             and (es.get(index='model', id=1)['_source']['completed'] == 0):
-        print('Why is this happening')
         data = [
             dict(
                 name='Training',
                 type="line",
                 # mode="markers",
                 x=[1, 2, 3, 4, 5],
-                y=[15, 10, 6, 3, 1],
+                y=[50, 50, 50, 50, 50],
                 # opacity=0,
                 hoverinfo="skip",
             ),
@@ -1734,7 +1733,7 @@ def update_loss_graph(n_clicks, value):
                 type="line",
                 # mode="markers",
                 x=[1, 2, 3, 4, 5],
-                y=[17, 11, 8, 4, 3],
+                y=[50, 50, 50, 50, 50],
                 # opacity=0,
                 hoverinfo="skip",
             ),
@@ -1785,7 +1784,7 @@ def update_acc_graph(n_clicks, value):
                 type="line",
                 # mode="markers",
                 x=[1, 2, 3, 4, 5],
-                y=[20, 60, 80, 83, 85],
+                y=[50, 50, 50, 50, 50],
                 # opacity=0,
                 hoverinfo="skip",
             ),
@@ -1794,7 +1793,7 @@ def update_acc_graph(n_clicks, value):
                 type="line",
                 # mode="markers",
                 x=[1, 2, 3, 4, 5],
-                y=[10, 35, 60, 72, 76],
+                y=[50, 50, 50, 50, 50],
                 # opacity=0,
                 hoverinfo="skip",
             ),
@@ -1830,9 +1829,9 @@ def update_acc_graph(n_clicks, value):
 def update_confusion_matrix_training(value):
     layout_confusion = copy.deepcopy(layout_training_confusion)
     layout_confusion['height'] = 230
-    if value is None or \
-            (es.get(index='model', id=1)['_source']['training'] == 0
-             and es.get(index='model', id=1)['_source']['load'] == 0):
+    if (es.get(index='model', id=1)['_source']['training'] == 0) \
+            and (es.get(index='model', id=1)['_source']['load'] == 0) \
+            and (es.get(index='model', id=1)['_source']['completed'] == 0):
         figure = go.Figure(data=[go.Heatmap(
             z=[[0, 100], [100, 0]],
             x=['False', 'True'],
@@ -1841,15 +1840,26 @@ def update_confusion_matrix_training(value):
             colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
             hoverongaps=False)],
             layout=layout_confusion)
-        return figure
+    elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_train']
+        figure = go.Figure(data=[go.Heatmap(
+            z=[[conf[0][0], conf[0][1]], [conf[1][1], conf[1][0]]],
+            x=['False', 'True'],
+            y=['True', 'False'],
+            text=[['FN', 'TP'], ['TN', 'FP']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
+            hoverongaps=False)],
+            layout=layout_confusion)
+    return figure
 
 
 def update_confusion_matrix_validation(value):
     layout_confusion = copy.deepcopy(layout_training_confusion)
     layout_confusion['height'] = 230
-    if value is None or \
-            (es.get(index='model', id=1)['_source']['training'] == 0
-             and es.get(index='model', id=1)['_source']['load'] == 0):
+    if (es.get(index='model', id=1)['_source']['training'] == 0) \
+            and (es.get(index='model', id=1)['_source']['load'] == 0) \
+            and (es.get(index='model', id=1)['_source']['completed'] == 0):
         figure = go.Figure(data=[go.Heatmap(
             z=[[0, 100], [100, 0]],
             x=['False', 'True'],
@@ -1858,15 +1868,27 @@ def update_confusion_matrix_validation(value):
             colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
             hoverongaps=False)],
             layout=layout_confusion)
-        return figure
+    elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_valid']
+        figure = go.Figure(data=[go.Heatmap(
+            z=[[conf[0][0], conf[0][1]], [conf[1][1], conf[1][0]]],
+            x=['False', 'True'],
+            y=['True', 'False'],
+            text=[['FN', 'TP'], ['TN', 'FP']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
+            hoverongaps=False)],
+            layout=layout_confusion)
+    return figure
+
 
 
 def update_confusion_matrix_test(value):
     layout_confusion = copy.deepcopy(layout_training_confusion)
     layout_confusion['height'] = 230
-    if value is None or \
-            (es.get(index='model', id=1)['_source']['training'] == 0
-             and es.get(index='model', id=1)['_source']['load'] == 0):
+    if (es.get(index='model', id=1)['_source']['training'] == 0) \
+            and (es.get(index='model', id=1)['_source']['load'] == 0) \
+            and (es.get(index='model', id=1)['_source']['completed'] == 0):
         figure = go.Figure(data=[go.Heatmap(
             z=[[0, 100], [100, 0]],
             x=['False', 'True'],
@@ -1875,15 +1897,26 @@ def update_confusion_matrix_test(value):
             colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
             hoverongaps=False)],
             layout=layout_confusion)
-        return figure
+    elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_test']
+        figure = go.Figure(data=[go.Heatmap(
+            z=[[conf[0][0], conf[0][1]], [conf[1][1], conf[1][0]]],
+            x=['False', 'True'],
+            y=['True', 'False'],
+            text=[['FN', 'TP'], ['TN', 'FP']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
+            hoverongaps=False)],
+            layout=layout_confusion)
+    return figure
 
 
 def update_confusion_metrics_training(value):
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
-    if value is None or \
-            (es.get(index='model', id=1)['_source']['training'] == 0
-             and es.get(index='model', id=1)['_source']['load'] == 0):
+    if (es.get(index='model', id=1)['_source']['training'] == 0) \
+            and (es.get(index='model', id=1)['_source']['load'] == 0) \
+            and (es.get(index='model', id=1)['_source']['completed'] == 0):
         figure = go.Figure(data=[
             go.Bar(name='Accuracy', x=['Score'], y=[0.5],
                    marker_color='rgb(226,239,248)'),
@@ -1897,15 +1930,36 @@ def update_confusion_metrics_training(value):
             layout=layout_confusion)
         figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
                                           autorange=False)
-        return figure
+
+    elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_train']
+        pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_train']
+        rec = es.get(index=model_name, id=1)['_source']['metrics']['rec_train']
+        f1 = es.get(index=model_name, id=1)['_source']['metrics']['f1_train']
+        figure = go.Figure(data=[
+            go.Bar(name='Accuracy', x=['Score'], y=[acc],
+                   marker_color='rgb(226,239,248)'),
+            go.Bar(name='Precision', x=['Score'], y=[pres],
+                   marker_color='rgb(179,214,237)'),
+            go.Bar(name='Recall', x=['Score'], y=[rec],
+                   marker_color='rgb(131,188,225)'),
+            go.Bar(name='F1 Score', x=['Score'], y=[f1],
+                   marker_color='rgb(84,162,214)'),
+        ],
+            layout=layout_confusion)
+        figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
+                                          autorange=False)
+
+    return figure
 
 
 def update_confusion_metrics_validation(value):
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
-    if value is None or \
-            (es.get(index='model', id=1)['_source']['training'] == 0
-             and es.get(index='model', id=1)['_source']['load'] == 0):
+    if (es.get(index='model', id=1)['_source']['training'] == 0) \
+            and (es.get(index='model', id=1)['_source']['load'] == 0) \
+            and (es.get(index='model', id=1)['_source']['completed'] == 0):
         figure = go.Figure(data=[
             go.Bar(name='Accuracy', x=['Score'], y=[0.5],
                    marker_color='rgb(226,239,248)'),
@@ -1919,15 +1973,35 @@ def update_confusion_metrics_validation(value):
             layout=layout_confusion)
         figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
                                           autorange=False)
-        return figure
+
+    elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_valid']
+        pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_valid']
+        rec = es.get(index=model_name, id=1)['_source']['metrics']['rec_valid']
+        f1 = es.get(index=model_name, id=1)['_source']['metrics']['f1_valid']
+        figure = go.Figure(data=[
+            go.Bar(name='Accuracy', x=['Score'], y=[acc],
+                   marker_color='rgb(226,239,248)'),
+            go.Bar(name='Precision', x=['Score'], y=[pres],
+                   marker_color='rgb(179,214,237)'),
+            go.Bar(name='Recall', x=['Score'], y=[rec],
+                   marker_color='rgb(131,188,225)'),
+            go.Bar(name='F1 Score', x=['Score'], y=[f1],
+                   marker_color='rgb(84,162,214)'),
+        ],
+            layout=layout_confusion)
+        figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
+                                          autorange=False)
+    return figure
 
 
 def update_confusion_metrics_test(value):
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
-    if value is None or \
-            (es.get(index='model', id=1)['_source']['training'] == 0
-             and es.get(index='model', id=1)['_source']['load'] == 0):
+    if (es.get(index='model', id=1)['_source']['training'] == 0) \
+            and (es.get(index='model', id=1)['_source']['load'] == 0) \
+            and (es.get(index='model', id=1)['_source']['completed'] == 0):
         figure = go.Figure(data=[
             go.Bar(name='Accuracy', x=['Score'], y=[0.5],
                    marker_color='rgb(226,239,248)'),
@@ -1941,7 +2015,27 @@ def update_confusion_metrics_test(value):
             layout=layout_confusion)
         figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
                                           autorange=False)
-        return figure
+
+    elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_test']
+        pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_test']
+        rec = es.get(index=model_name, id=1)['_source']['metrics']['rec_test']
+        f1 = es.get(index=model_name, id=1)['_source']['metrics']['f1_test']
+        figure = go.Figure(data=[
+            go.Bar(name='Accuracy', x=['Score'], y=[acc],
+                   marker_color='rgb(226,239,248)'),
+            go.Bar(name='Precision', x=['Score'], y=[pres],
+                   marker_color='rgb(179,214,237)'),
+            go.Bar(name='Recall', x=['Score'], y=[rec],
+                   marker_color='rgb(131,188,225)'),
+            go.Bar(name='F1 Score', x=['Score'], y=[f1],
+                   marker_color='rgb(84,162,214)'),
+        ],
+            layout=layout_confusion)
+        figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
+                                          autorange=False)
+    return figure
 
 
 # Dash Functions

@@ -17,7 +17,8 @@ es = Elasticsearch()
 
 try:
     es.index(index='model', id=1, body={'name': '', 'training': 0, 'load': 0,
-                                        'batch': 0, 'epochs': 0, 'samples': 0})
+                                        'batch': 0, 'epochs': 0, 'samples': 0,
+                                        'completed': 0})
 except:
     print('Please check the Elasticsearch Server')
 
@@ -1714,9 +1715,10 @@ def update_loss_graph(n_clicks, value):
     layout_loss['height'] = '400'
     layout_loss['width'] = '850'
     layout_loss['margin'] = dict(l=0, r=0, b=20, t=0),
-    if value is None or \
-            (es.get(index='model', id=1)['_source']['training'] == 0
-             and es.get(index='model', id=1)['_source']['load'] == 0):
+    if (es.get(index='model', id=1)['_source']['training'] == 0) \
+            and (es.get(index='model', id=1)['_source']['load'] == 0) \
+            and (es.get(index='model', id=1)['_source']['completed'] == 0):
+        print('Why is this happening')
         data = [
             dict(
                 name='Training',
@@ -1738,15 +1740,16 @@ def update_loss_graph(n_clicks, value):
             ),
         ]
         figure = dict(data=data, layout=layout_loss)
-    elif es.get(index='model', id=1)['_source']['training']:
+    elif (es.get(index='model', id=1)['_source']['training'] == 1) or \
+            (es.get(index='model', id=1)['_source']['completed'] == 1):
         body = es.get(index=es.get(index='model', id=1)['_source']['name'], id=1)['_source']
         data = [
             dict(
                 name='Training',
                 type="line",
                 # mode="markers",
-                x=body['epochs'],
-                y=body['loss'],
+                x=body['training']['epochs'],
+                y=body['training']['loss'],
                 # opacity=0,
                 hoverinfo="skip",
             ),
@@ -1754,13 +1757,14 @@ def update_loss_graph(n_clicks, value):
                 name='Validation',
                 type="line",
                 # mode="markers",
-                x=body['epochs'],
-                y=body['val_loss'],
+                x=body['training']['epochs'],
+                y=body['training']['val_loss'],
                 # opacity=0,
                 hoverinfo="skip",
             ),
         ]
-
+        figure = dict(data=data, layout=layout_loss)
+    print(es.get(index='model', id=1)['_source'])
     return figure
 
 

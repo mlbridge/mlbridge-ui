@@ -1844,7 +1844,7 @@ def update_confusion_matrix_training(value):
         model_name = es.get(index='model', id=1)['_source']['name']
         conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_train']
         figure = go.Figure(data=[go.Heatmap(
-            z=[[conf[0][0], conf[0][1]], [conf[1][1], conf[1][0]]],
+            z=[[conf[0][1], conf[0][0]], [conf[1][1], conf[1][0]]],
             x=['False', 'True'],
             y=['True', 'False'],
             text=[['FN', 'TP'], ['TN', 'FP']],
@@ -1872,7 +1872,7 @@ def update_confusion_matrix_validation(value):
         model_name = es.get(index='model', id=1)['_source']['name']
         conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_valid']
         figure = go.Figure(data=[go.Heatmap(
-            z=[[conf[0][0], conf[0][1]], [conf[1][1], conf[1][0]]],
+            z=[[conf[0][1], conf[0][0]], [conf[1][1], conf[1][0]]],
             x=['False', 'True'],
             y=['True', 'False'],
             text=[['FN', 'TP'], ['TN', 'FP']],
@@ -1880,7 +1880,6 @@ def update_confusion_matrix_validation(value):
             hoverongaps=False)],
             layout=layout_confusion)
     return figure
-
 
 
 def update_confusion_matrix_test(value):
@@ -1901,7 +1900,7 @@ def update_confusion_matrix_test(value):
         model_name = es.get(index='model', id=1)['_source']['name']
         conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_test']
         figure = go.Figure(data=[go.Heatmap(
-            z=[[conf[0][0], conf[0][1]], [conf[1][1], conf[1][0]]],
+            z=[[conf[0][1], conf[0][0]], [conf[1][1], conf[1][0]]],
             x=['False', 'True'],
             y=['True', 'False'],
             text=[['FN', 'TP'], ['TN', 'FP']],

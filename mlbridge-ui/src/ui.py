@@ -1738,7 +1738,30 @@ def update_loss_graph(n_clicks, value):
             ),
         ]
         figure = dict(data=data, layout=layout_loss)
-        return figure
+    elif es.get(index='model', id=1)['_source']['training']:
+        body = es.get(index=es.get(index='model', id=1)['_source']['name'], id=1)['_source']
+        data = [
+            dict(
+                name='Training',
+                type="line",
+                # mode="markers",
+                x=body['epochs'],
+                y=body['loss'],
+                # opacity=0,
+                hoverinfo="skip",
+            ),
+            dict(
+                name='Validation',
+                type="line",
+                # mode="markers",
+                x=body['epochs'],
+                y=body['val_loss'],
+                # opacity=0,
+                hoverinfo="skip",
+            ),
+        ]
+
+    return figure
 
 
 def update_acc_graph(n_clicks, value):

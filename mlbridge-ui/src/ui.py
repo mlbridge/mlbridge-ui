@@ -1763,6 +1763,30 @@ def update_loss_graph(n_clicks, value):
             ),
         ]
         figure = dict(data=data, layout=layout_loss)
+    elif es.get(index='model', id=1)['_source']['load'] == 1:
+        body = es.get(index=es.get(index='model', id=1)['_source']['name'], id=1)['_source']
+        data = [
+            dict(
+                name='Training',
+                type="line",
+                # mode="markers",
+                x=body['training']['epochs'],
+                y=body['training']['loss'],
+                # opacity=0,
+                hoverinfo="skip",
+            ),
+            dict(
+                name='Validation',
+                type="line",
+                # mode="markers",
+                x=body['training']['epochs'],
+                y=body['training']['val_loss'],
+                # opacity=0,
+                hoverinfo="skip",
+            ),
+        ]
+        figure = dict(data=data, layout=layout_loss)
+
     return figure
 
 
@@ -1823,6 +1847,29 @@ def update_acc_graph(n_clicks, value):
             ),
         ]
         figure = dict(data=data, layout=layout_loss)
+    elif es.get(index='model', id=1)['_source']['load'] == 1:
+        body = es.get(index=es.get(index='model', id=1)['_source']['name'], id=1)['_source']
+        data = [
+            dict(
+                name='Training',
+                type="line",
+                # mode="markers",
+                x=body['training']['epochs'],
+                y=body['training']['acc'],
+                # opacity=0,
+                hoverinfo="skip",
+            ),
+            dict(
+                name='Validation',
+                type="line",
+                # mode="markers",
+                x=body['training']['epochs'],
+                y=body['training']['val_acc'],
+                # opacity=0,
+                hoverinfo="skip",
+            ),
+        ]
+        figure = dict(data=data, layout=layout_loss)
     return figure
 
 
@@ -1851,6 +1898,18 @@ def update_confusion_matrix_training(value):
             colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
             hoverongaps=False)],
             layout=layout_confusion)
+    elif es.get(index='model', id=1)['_source']['load'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_train']
+        figure = go.Figure(data=[go.Heatmap(
+            z=[[conf[0][1], conf[0][0]], [conf[1][1], conf[1][0]]],
+            x=['False', 'True'],
+            y=['True', 'False'],
+            text=[['FN', 'TP'], ['TN', 'FP']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
+            hoverongaps=False)],
+            layout=layout_confusion)
+
     return figure
 
 
@@ -1869,6 +1928,17 @@ def update_confusion_matrix_validation(value):
             hoverongaps=False)],
             layout=layout_confusion)
     elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_valid']
+        figure = go.Figure(data=[go.Heatmap(
+            z=[[conf[0][1], conf[0][0]], [conf[1][1], conf[1][0]]],
+            x=['False', 'True'],
+            y=['True', 'False'],
+            text=[['FN', 'TP'], ['TN', 'FP']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
+            hoverongaps=False)],
+            layout=layout_confusion)
+    elif es.get(index='model', id=1)['_source']['load'] == 1:
         model_name = es.get(index='model', id=1)['_source']['name']
         conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_valid']
         figure = go.Figure(data=[go.Heatmap(
@@ -1907,6 +1977,17 @@ def update_confusion_matrix_test(value):
             colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
             hoverongaps=False)],
             layout=layout_confusion)
+    elif es.get(index='model', id=1)['_source']['load'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        conf = es.get(index=model_name, id=1)['_source']['metrics']['cf_matrix_test']
+        figure = go.Figure(data=[go.Heatmap(
+            z=[[conf[0][1], conf[0][0]], [conf[1][1], conf[1][0]]],
+            x=['False', 'True'],
+            y=['True', 'False'],
+            text=[['FN', 'TP'], ['TN', 'FP']],
+            colorscale=[[0, 'rgb(226,239,248)'], [1.0, 'rgb(84,162,214)']],
+            hoverongaps=False)],
+            layout=layout_confusion)
     return figure
 
 
@@ -1931,6 +2012,26 @@ def update_confusion_metrics_training(value):
                                           autorange=False)
 
     elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_train']
+        pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_train']
+        rec = es.get(index=model_name, id=1)['_source']['metrics']['rec_train']
+        f1 = es.get(index=model_name, id=1)['_source']['metrics']['f1_train']
+        figure = go.Figure(data=[
+            go.Bar(name='Accuracy', x=['Score'], y=[acc],
+                   marker_color='rgb(226,239,248)'),
+            go.Bar(name='Precision', x=['Score'], y=[pres],
+                   marker_color='rgb(179,214,237)'),
+            go.Bar(name='Recall', x=['Score'], y=[rec],
+                   marker_color='rgb(131,188,225)'),
+            go.Bar(name='F1 Score', x=['Score'], y=[f1],
+                   marker_color='rgb(84,162,214)'),
+        ],
+            layout=layout_confusion)
+        figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
+                                          autorange=False)
+
+    elif es.get(index='model', id=1)['_source']['load'] == 1:
         model_name = es.get(index='model', id=1)['_source']['name']
         acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_train']
         pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_train']
@@ -1992,6 +2093,27 @@ def update_confusion_metrics_validation(value):
             layout=layout_confusion)
         figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
                                           autorange=False)
+
+    elif es.get(index='model', id=1)['_source']['load'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_valid']
+        pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_valid']
+        rec = es.get(index=model_name, id=1)['_source']['metrics']['rec_valid']
+        f1 = es.get(index=model_name, id=1)['_source']['metrics']['f1_valid']
+        figure = go.Figure(data=[
+            go.Bar(name='Accuracy', x=['Score'], y=[acc],
+                   marker_color='rgb(226,239,248)'),
+            go.Bar(name='Precision', x=['Score'], y=[pres],
+                   marker_color='rgb(179,214,237)'),
+            go.Bar(name='Recall', x=['Score'], y=[rec],
+                   marker_color='rgb(131,188,225)'),
+            go.Bar(name='F1 Score', x=['Score'], y=[f1],
+                   marker_color='rgb(84,162,214)'),
+        ],
+            layout=layout_confusion)
+        figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
+                                          autorange=False)
+
     return figure
 
 
@@ -2016,6 +2138,26 @@ def update_confusion_metrics_test(value):
                                           autorange=False)
 
     elif es.get(index='model', id=1)['_source']['completed'] == 1:
+        model_name = es.get(index='model', id=1)['_source']['name']
+        acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_test']
+        pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_test']
+        rec = es.get(index=model_name, id=1)['_source']['metrics']['rec_test']
+        f1 = es.get(index=model_name, id=1)['_source']['metrics']['f1_test']
+        figure = go.Figure(data=[
+            go.Bar(name='Accuracy', x=['Score'], y=[acc],
+                   marker_color='rgb(226,239,248)'),
+            go.Bar(name='Precision', x=['Score'], y=[pres],
+                   marker_color='rgb(179,214,237)'),
+            go.Bar(name='Recall', x=['Score'], y=[rec],
+                   marker_color='rgb(131,188,225)'),
+            go.Bar(name='F1 Score', x=['Score'], y=[f1],
+                   marker_color='rgb(84,162,214)'),
+        ],
+            layout=layout_confusion)
+        figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
+                                          autorange=False)
+
+    elif es.get(index='model', id=1)['_source']['load'] == 1:
         model_name = es.get(index='model', id=1)['_source']['name']
         acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_test']
         pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_test']

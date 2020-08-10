@@ -124,9 +124,9 @@ trained.
 
 <p float="left" align = "center">
   <img src="https://github.com/mlbridge/mlbridge-ui/blob/master/readme-assets/accuracy_graph.jpg" width
-  ="600"/>
+  ="550"/>
   <img src="https://github.com/mlbridge/mlbridge-ui/blob/master/readme-assets/loss_graph.jpg" width
-  ="600"/>
+  ="550"/>
 </p>
 
 Once the training is complete, the model efficacy can be judged by looking at 

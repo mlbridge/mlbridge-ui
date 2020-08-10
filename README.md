@@ -123,9 +123,9 @@ The accuracy and loss graphs are updated in real time while the model is being
 trained.
 
 <p float="left" align = "center">
-  <img src="https://github.com/chanakyaekbote/coredns_ml_plugin/blob/master/readme_assets/benign_app_1.PNG" width
+  <img src="https://github.com/mlbridge/mlbridge-ui/blob/master/readme-assets/accuracy_graph.jpg" width
   ="400"/>
-  <img src="https://github.com/chanakyaekbote/coredns_ml_plugin/blob/master/readme_assets/benign_app_2.PNG" width
+  <img src="https://github.com/mlbridge/mlbridge-ui/blob/master/readme-assets/loss_graph.jpg" width
   ="400"/>
 </p>
 

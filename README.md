@@ -1,5 +1,7 @@
 # MLBridge-UI
 
+![GSoC Icon](https://developers.google.com/open-source/gsoc/resources/downloads/GSoC-logo-horizontal-200.png)
+
 This repository contains the user interface for the MLBridge Project. It allows 
 the user to customise it as per his/her requirement for any other project, for 
 example genomics, computer vision etc. Currently, it is being used for domain 

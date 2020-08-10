@@ -11,7 +11,7 @@ import numpy as np
 import datetime
 import unittest
 import os
-from .malicious_domain_name_analysis import *
+from mlbridge-ui.src.ui import *
 from faker import Faker
 from unittest import mock
 

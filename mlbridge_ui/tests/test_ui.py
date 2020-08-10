@@ -92,8 +92,8 @@ class TestMaliciousDomainNameAnalysis(unittest.TestCase):
         figure_mal = update_pie_graph(1, '1-remont.com')
 
         self.assertTrue(figure_none['data'][0]['values'][0] == 0.5)
-        self.assertTrue(figure_benign['data'][0]['values'][0] > 0.5)
-        self.assertTrue(figure_mal['data'][0]['values'][0] < 0.5)
+        self.assertTrue(figure_benign['data'][0]['values'][0] < 0.5)
+        self.assertTrue(figure_mal['data'][0]['values'][0] > 0.5)
 
     def test_update_line_graph(self):
         figure_none = update_line_graph(1, None, None, None, None, None, None)

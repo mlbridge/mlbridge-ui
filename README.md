@@ -1,4 +1,6 @@
 # MLBridge-UI
+[![Build Status](https://travis-ci.org/mlbridge/mlbridge-ui.svg?branch=master)](https://travis-ci.org/mlbridge/mlbridge-ui)
+
 
 ![GSoC Icon](https://developers.google.com/open-source/gsoc/resources/downloads/GSoC-logo-horizontal-200.png)
 

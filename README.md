@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/mlbridge/mlbridge-ui)](https://github.com/mlbridge/mlbridge-ui/blob/master/LICENSE)
 
 
-![GSoC Icon](https://developers.google.com/open-source/gsoc/resources/downloads/GSoC-logo-horizontal-400.png)
+![GSoC Icon](https://developers.google.com/open-source/gsoc/resources/downloads/GSoC-logo-horizontal-200.png)
 
 This repository contains the user interface for the MLBridge Project. It allows 
 the user to customise it as per his/her requirement for any other project, for 

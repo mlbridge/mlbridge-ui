@@ -2157,7 +2157,8 @@ def update_confusion_metrics_test(value):
         figure['layout']['yaxis1'].update(title='', range=[0, 1], dtick=0.5,
                                           autorange=False)
 
-    elif es.get(index='model', id=1)['_source']['load'] == 1:
+    elif es.get(index='model', id=1)['_source']['load' \
+                                                ''] == 1:
         model_name = es.get(index='model', id=1)['_source']['name']
         acc = es.get(index=model_name, id=1)['_source']['metrics']['acc_test']
         pres = es.get(index=model_name, id=1)['_source']['metrics']['pres_test']

@@ -49,7 +49,7 @@ A demo of the application can be seen below:
     <img style="float: right;" src="https://github.com/chanakyaekbote/coredns_ml_plugin/blob/master/readme_assets/dash_app_gif.gif">
 </p>
 
-Historical Analysis has three main use cases:
+There are three main use cases for having a historical analysis:
 
 - Domain Name Analysis: The application allows the user to search for a
 a particular domain name along with a request time range. The application will 
@@ -115,5 +115,26 @@ updating the dataset for retraining the model.
 
 
 ### Retraining the Model
+
+The machine learning model would have to be retrained when there is new data or 
+the model is underperforming. The model can be retrained via the `training` tab.
+
+The accuracy and loss graphs are updated in real time while the model is being 
+trained.
+
+<p float="left" align = "center">
+  <img src="https://github.com/chanakyaekbote/coredns_ml_plugin/blob/master/readme_assets/benign_app_1.PNG" width
+  ="400"/>
+  <img src="https://github.com/chanakyaekbote/coredns_ml_plugin/blob/master/readme_assets/benign_app_2.PNG" width
+  ="400"/>
+</p>
+
+Once the training is complete, the model efficacy can be judged by looking at 
+the confusion matrices as well as the confusion metrics.
+
+<p align = "center">
+  <img src="https://github.com/cekbote/coredns_ml_plugin/blob/master/readme_assets/manual_vetting_screenshot.PNG" 
+  width="700"/> 
+</p>
 
 

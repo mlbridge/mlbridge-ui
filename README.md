@@ -133,7 +133,7 @@ Once the training is complete, the model efficacy can be judged by looking at
 the confusion matrices as well as the confusion metrics.
 
 <p align = "center">
-  <img src="https://github.com/cekbote/coredns_ml_plugin/blob/master/readme_assets/manual_vetting_screenshot.PNG" 
+  <img src="https://github.com/mlbridge/mlbridge-ui/blob/master/readme-assets/confusion_metrics_and_matrices.jpg" 
   width="700"/> 
 </p>
 

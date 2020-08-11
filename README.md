@@ -1,5 +1,6 @@
 # MLBridge-UI
 [![Build Status](https://travis-ci.org/mlbridge/mlbridge-ui.svg?branch=master)](https://travis-ci.org/mlbridge/mlbridge-ui)
+[![codecov](https://codecov.io/gh/mlbridge/mlbridge-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/mlbridge/mlbridge-ui)
 [![GitHub issues](https://img.shields.io/github/issues/mlbridge/mlbridge-ui)](https://github.com/mlbridge/mlbridge-ui/issues)
 [![GitHub license](https://img.shields.io/github/license/mlbridge/mlbridge-ui)](https://github.com/mlbridge/mlbridge-ui/blob/master/LICENSE)
 

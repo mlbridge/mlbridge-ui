@@ -28,7 +28,7 @@ Install Elasticsearch by following the instructions from this
 [link](https://phoenixnap.com/kb/install-elasticsearch-ubuntu). Start the 
 Elasticsearch server and then run the `ui.py` app:
 ```
-cd mlbridge-ui/mlbridge-ui/src
+cd mlbridge-ui/mlbridge_ui/src
 python3 ui.py
 ```
 

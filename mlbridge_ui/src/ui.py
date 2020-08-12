@@ -1075,6 +1075,20 @@ app.layout = html.Div(children=[
 # Control Messages
 
 def input_message(n_clicks, value):
+    """
+
+    Function that returns a message when a domain name is entered.
+
+    Args:
+        n_clicks: Number of clicks registered by the submit button.
+        value: The domain name that is entered by the user.
+
+    Returns:
+        A message as a response to the user as the result of an input for the
+        domain name.
+
+    """
+
     try:
         keys = es.indices.get('*').keys()
     except:
@@ -1088,6 +1102,22 @@ def input_message(n_clicks, value):
 
 
 def date_message(n_clicks, freq, start_date, end_date):
+    """
+
+    Function that returns a message when the user enters a date range.
+
+    Args:
+        n_clicks: Number of clicks registered by the submit button.
+        freq: Radio option for selecting the requests per day, hour, minute.
+        start_date: Start date for the historical analysis.
+        end_date: End date for the historical analysis.
+
+    Returns:
+        A message to the user as a response to the inputs for the historical
+        analysis.
+
+    """
+
     if start_date is None or end_date is None:
         return 'Please enter the date range'
     elif freq == 'Hour' or freq == 'Minute':
@@ -1109,6 +1139,19 @@ def date_message(n_clicks, freq, start_date, end_date):
 
 
 def radio_button_message(n_clicks, value):
+    """
+
+    Function that returns a message when the user selects a radio button.
+
+    Args:
+        n_clicks: Number of clicks registered by the submit button.
+        value: The radio button option selected by the user.
+
+    Returns:
+        A message to the user as a response to the radio button input.
+
+    """
+
     if value is None:
         return 'Please select an option'
     else:
@@ -1116,6 +1159,23 @@ def radio_button_message(n_clicks, value):
 
 
 def hour_range_message(freq, start, end):
+    """
+
+    Function that returns a message when the user selects options for historical
+    analysis.
+
+
+    Args:
+        freq: Radio option for selecting the requests per day, hour, minute.
+        start: Start time for the historical analysis.
+        end: End time for the historical analysis.
+
+    Returns:
+        A message to the user as a response to the the inputs for obtaining
+        the historical analysis.
+
+    """
+
     if freq is None or freq == 'Day':
         return html.Div([])
     elif start is None or start is '' or end is None or end is '':

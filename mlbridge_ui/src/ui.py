@@ -1203,6 +1203,16 @@ def hour_range_message(freq, start, end):
 
 
 def display_hour_range(value):
+    """
+
+    Function that 
+
+    Args:
+        value:
+
+    Returns:
+
+    """
     if value is None or value == 'Day':
         return {'display': 'none'}
     else:

@@ -1,4 +1,4 @@
-# MLBridge-UI
+# ML Bridge - User Interface
 [![Build Status](https://travis-ci.org/mlbridge/mlbridge-ui.svg?branch=master)](https://travis-ci.org/mlbridge/mlbridge-ui)
 [![codecov](https://codecov.io/gh/mlbridge/mlbridge-ui/branch/master/graph/badge.svg)](https://codecov.io/gh/mlbridge/mlbridge-ui)
 [![GitHub issues](https://img.shields.io/github/issues/mlbridge/mlbridge-ui)](https://github.com/mlbridge/mlbridge-ui/issues)
@@ -29,7 +29,7 @@ Install Elasticsearch by following the instructions from this
 Elasticsearch server and then run the `ui.py` app:
 ```
 cd mlbridge-ui/mlbridge_ui/src
-python3 ui.py
+python ui.py
 ```
 
 ## Features:

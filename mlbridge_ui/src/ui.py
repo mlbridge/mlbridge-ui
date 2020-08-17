@@ -1400,6 +1400,23 @@ def update_line_graph(n_clicks, start_hour, end_hour, input_value,
 
 
 def update_ip_table(nclicks, value):
+    """
+
+    Function that updates the IP table in the Elasticsearch Database that
+    contains the frequency as well as the IP address of the machine querying
+    that particular domain.
+
+    Args:
+        nclicks: Contains the number of clicks registered by the submit button.
+        value: Contains the domain name corresponding to which the IP table has
+               to be returned.
+
+    Returns:
+        The IP address data regarding the number of times a particular domain
+        was queried by a particular machine. 
+
+    """
+
     if value is None or value == '':
         return []
     else:

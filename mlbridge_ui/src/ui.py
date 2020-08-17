@@ -1570,6 +1570,20 @@ def display_benign_list(value):
 
 
 def display_benign_graph(value):
+    """
+
+    Function that either displays the graph of the top 20 benign domains or
+    hides them depending on the position of the toggle switch.
+
+    Args:
+        value: Contains the value of the toggle switch.
+
+    Returns:
+        A dictionary that communicates with the Dash interface whether to
+        display the graph of the top 20 benign domains or hide them.
+
+    """
+
     if value is True:
         return {'display': 'none'}
     else:

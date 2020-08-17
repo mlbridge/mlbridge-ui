@@ -1413,7 +1413,7 @@ def update_ip_table(nclicks, value):
 
     Returns:
         The IP address data regarding the number of times a particular domain
-        was queried by a particular machine. 
+        was queried by a particular machine.
 
     """
 
@@ -1433,6 +1433,20 @@ def update_ip_table(nclicks, value):
 
 
 def display_mal_list(value):
+    """
+
+    Function that either displays the top 20 malicious domains or hides them
+    depending on the position of the toggle switch.
+
+    Args:
+        value: Contains the location of the toggle switch.
+
+    Returns:
+        A dictionary that communicates with the Dash interface whether to
+        display the top 20 malicious domains or hide them.
+
+    """
+    
     if value is False:
         return {'display': 'none'}
     else:

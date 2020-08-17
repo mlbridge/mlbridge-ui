@@ -1205,14 +1205,18 @@ def hour_range_message(freq, start, end):
 def display_hour_range(value):
     """
 
-    Function that 
+    Function that either displays the hour range input or hides depending on the
+    time radio button selected.
 
     Args:
-        value:
+        value: Contains the time radio button option selected.
 
     Returns:
+        A dictionary that communicates with the Dash interface whether to
+        display the hour range or hide it.
 
     """
+
     if value is None or value == 'Day':
         return {'display': 'none'}
     else:
@@ -1220,6 +1224,22 @@ def display_hour_range(value):
 
 
 def update_pie_graph(n_clicks, value):
+    """
+
+    Function that returns a pie graph whether the domain name entered is
+    malicious or benign.
+
+    Args:
+        n_clicks: Contains the number of clicks registered by the submit button.
+        value: Contains the probability whether the domain name entered is
+               malicious or benign.
+
+    Returns:
+        A pie graph that displays the probability whether the domain name
+        entered is malicious or benign.
+
+    """
+
     layout_pie = copy.deepcopy(layout)
     layout_pie["title"] = 'Prediction'
     layout_pie["font"] = dict(color="#777777")
@@ -2575,4 +2595,4 @@ def update_confusion_metrics_test_dash(n_clicks, value, n_intervals):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=False)

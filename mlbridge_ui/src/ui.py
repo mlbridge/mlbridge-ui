@@ -1502,6 +1502,19 @@ def update_mal_dns_table(nclicks, value):
 
 
 def update_mal_bar_graph(value, interval):
+    """
+
+    Function that returns a bar graph of the top 20 malicious domains.
+
+    Args:
+        value: Contains the value of the toggle switch
+        interval: Contains the interval after which the figure should be
+                  refreshed.
+
+    Returns:
+        A bar graph that contains the top 20 malicious domains.
+
+    """
     try:
         mal = es.get(index='mal', id=1)['_source']
     except:

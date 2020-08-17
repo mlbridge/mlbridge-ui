@@ -1435,7 +1435,7 @@ def update_ip_table(nclicks, value):
 def display_mal_list(value):
     """
 
-    Function that either displays the top 20 malicious domains or hides them
+    Function that either displays the list of malicious domains or hides them
     depending on the position of the toggle switch.
 
     Args:
@@ -1443,10 +1443,10 @@ def display_mal_list(value):
 
     Returns:
         A dictionary that communicates with the Dash interface whether to
-        display the top 20 malicious domains or hide them.
+        display the list of malicious domains or hide them.
 
     """
-    
+
     if value is False:
         return {'display': 'none'}
     else:
@@ -1454,6 +1454,20 @@ def display_mal_list(value):
 
 
 def display_mal_graph(value):
+    """
+
+    Function that either displays the graph of the top 20 malicious domains or
+    hides them depending on the position of the toggle switch.
+
+    Args:
+        value: Contains the location of the toggle switch.
+
+    Returns:
+        A dictionary that communicates with the Dash interface whether to
+        display the graph of the top 20 malicious domains or hide them.
+
+    """
+
     if value is False:
         return {'display': 'unset'}
     else:

@@ -1439,7 +1439,7 @@ def display_mal_list(value):
     depending on the position of the toggle switch.
 
     Args:
-        value: Contains the location of the toggle switch.
+        value: Contains the value of the toggle switch.
 
     Returns:
         A dictionary that communicates with the Dash interface whether to
@@ -1460,7 +1460,7 @@ def display_mal_graph(value):
     hides them depending on the position of the toggle switch.
 
     Args:
-        value: Contains the location of the toggle switch.
+        value: Contains the value of the toggle switch.
 
     Returns:
         A dictionary that communicates with the Dash interface whether to
@@ -1475,6 +1475,19 @@ def display_mal_graph(value):
 
 
 def update_mal_dns_table(nclicks, value):
+    """
+
+    Function that returns the data that contains the list of malicious domains.
+
+    Args:
+        nclicks: Contains the number of clicks registered by the submit button.
+        value: Contains the value of the toggle switch.
+
+    Returns:
+        Data that contains the list of malicious domains.
+
+    """
+
     try:
         mal = es.get(index='mal', id=1)['_source']
         domain_names = [key for (key, value) in

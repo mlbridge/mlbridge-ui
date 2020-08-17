@@ -1515,6 +1515,7 @@ def update_mal_bar_graph(value, interval):
         A bar graph that contains the top 20 malicious domains.
 
     """
+
     try:
         mal = es.get(index='mal', id=1)['_source']
     except:
@@ -1548,6 +1549,20 @@ def update_mal_bar_graph(value, interval):
 
 
 def display_benign_list(value):
+    """
+
+      Function that either displays the list of benign domains or hides them
+      depending on the position of the toggle switch.
+
+      Args:
+          value: Contains the value of the toggle switch.
+
+      Returns:
+          A dictionary that communicates with the Dash interface whether to
+          display the list of benign domains or hide them.
+
+      """
+
     if value is False:
         return {'display': 'none'}
     else:

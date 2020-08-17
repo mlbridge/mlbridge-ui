@@ -1281,6 +1281,29 @@ def update_pie_graph(n_clicks, value):
 
 def update_line_graph(n_clicks, start_hour, end_hour, input_value,
                       start_date, end_date, freq_value):
+    """
+
+    Function that updates the line graph that displays the frequency, the time
+    as well as the date when that particular domain name was queried.
+
+    Args:
+        n_clicks: Contains the number of clicks registered by the submit button.
+        start_hour: Contains the start the of the hour range between which the
+                    frequency of the domain name queried would be investigated.
+        end_hour: Contains the end the of the hour range between which frequency
+                  of the domain name queried would be investigated.
+        input_value: Contains the domain name that has to be investigated.
+        start_date: Contains the start the of the date range between which the
+                    frequency of the domain name queried would be investigated.
+        end_date: Contains the end the of the hour range between which the
+                  frequency of the domain name queried would be investigated.
+        freq_value: Contains the value of the time radio button selected.
+
+    Returns:
+        A line graph.
+
+    """
+
     layout_count = copy.deepcopy(layout)
     layout_count['title'] = "Requests"
     if freq_value is None:

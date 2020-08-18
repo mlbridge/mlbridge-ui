@@ -2046,6 +2046,21 @@ def update_es_parameters_and_messages(model_name, option, epochs_input,
 
 
 def update_display_training_options(value):
+    """
+
+    Function that either displays the input fields required to be filled in by
+    the user for training or hides them.
+
+    Args:
+        value: Contains the value of the toggle switch.
+
+    Returns:
+        A dictionary that communicates with the Dash interface whether to
+        display the input fields required to be filled in by the user for
+        training or hide them.
+
+    """
+
     if value is None or value == 'load':
         return {'display': 'none'}
     else:

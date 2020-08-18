@@ -2089,6 +2089,21 @@ def update_loss_accuracy_display(value):
 
 
 def update_loss_graph(n_clicks, value):
+    """
+
+    Function that returns a line graph of the loss graph (loss percentage vs
+    epochs) of the deep learning model.
+
+    Args:
+        n_clicks: Contains the number of clicks registered by the submit button.
+        value: Contains the model name that is currently being trained or is
+               an older model whose efficacy has to be investigated.
+
+    Returns:
+        A loss graph of the deep learning model.
+
+    """
+
     layout_loss = copy.deepcopy(layout)
     layout_loss['title'] = 'Loss Graph'
     layout_loss['xaxis'] = {'title': 'Epochs'}

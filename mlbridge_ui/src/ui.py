@@ -1618,6 +1618,20 @@ def update_benign_dns_table(nclicks, value):
 
 
 def update_benign_bar_graph(value, interval):
+    """
+
+    Function that returns a bar graph of the top 20 benign domains.
+
+    Args:
+        value: Contains the value of the toggle switch
+        interval: Contains the interval after which the figure should be
+                  refreshed.
+
+    Returns:
+        A bar graph that contains the top benign domains.
+
+    """
+    
     try:
         benign = es.get(index='benign', id=1)['_source']
     except:

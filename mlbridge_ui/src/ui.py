@@ -1665,6 +1665,20 @@ def update_benign_bar_graph(value, interval):
 
 
 def update_whois_info(n_clicks, domain_name):
+    """
+
+    Function that returns the the information of the domain name queried from
+    the WhoIS Database.
+
+    Args:
+        n_clicks: Contains the number of clicks registered by the submit button.
+        domain_name: Contains the domain name queried.
+
+    Returns:
+        Information from the WhoIS Database regarding the domain name queried.
+
+    """
+
     whois_ip = ''
     whois_hostnames = ''
     whois_city = ''

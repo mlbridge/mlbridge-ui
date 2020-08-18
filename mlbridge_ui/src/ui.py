@@ -95,7 +95,7 @@ app.layout = html.Div(children=[
                 [
                     html.A(
                         html.Button("Learn More", id="learn-more-button"),
-                        href="https://github.com/mlbridge",
+                        href="https://mlbridge.github.io",
                     )
                 ],
                 className="one-third column",

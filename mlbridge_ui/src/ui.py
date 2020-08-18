@@ -3077,6 +3077,14 @@ def update_blacklist_vet_table_dash(n_intervals):
                State('input_sample', 'value')])
 def update_es_parameters_and_messages_dash(n_clicks, option, model, epochs,
                                            batch, samples):
+    """
+
+    Function that just calls the update_es_parameters_and_messages function.
+    This function is decorated by the Dash Application decorator. Such an
+    arrangement is used as unit testing decorated functions is complex.
+
+    """
+
     model_message, epochs_message, batch_message, samples_message \
         = update_es_parameters_and_messages(model, option, epochs, batch, samples)
     return model_message, epochs_message, batch_message, samples_message
@@ -3085,6 +3093,14 @@ def update_es_parameters_and_messages_dash(n_clicks, option, model, epochs,
 @app.callback(Output('training_options', 'style'),
               [Input('model_option', 'value')])
 def update_display_training_options_dash(value):
+    """
+
+    Function that just calls the update_display_training_options function. This
+    function is decorated by the Dash Application decorator. Such an arrangement
+    is used as unit testing decorated functions is complex.
+
+    """
+
     display = update_display_training_options(value)
     return display
 
@@ -3093,6 +3109,14 @@ def update_display_training_options_dash(value):
                Output('acc_graph', 'style')],
               [Input('train_switch', 'value')])
 def update_loss_accuracy_display_dash(value):
+    """
+
+    Function that just calls the update_loss_accuracy_display function. This
+    function is decorated by the Dash Application decorator. Such an arrangement
+    is used as unit testing decorated functions is complex.
+
+    """
+
     display_loss, display_acc = update_loss_accuracy_display(value)
     return display_loss, display_acc
 
@@ -3102,6 +3126,14 @@ def update_loss_accuracy_display_dash(value):
                Input('input_text', 'value'),
                Input('interval', 'n_intervals')])
 def update_loss_graph_dash(n_clicks, value, n_intervals):
+    """
+
+    Function that just calls the update_loss_graph function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     figure = update_loss_graph(n_clicks, value)
     return figure
 
@@ -3111,6 +3143,14 @@ def update_loss_graph_dash(n_clicks, value, n_intervals):
                Input('input_text', 'value'),
                Input('interval', 'n_intervals')])
 def update_acc_graph_dash(n_clicks, value, n_intervals):
+    """
+
+    Function that just calls the update_acc_graph function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     figure = update_acc_graph(n_clicks, value)
     return figure
 
@@ -3120,6 +3160,14 @@ def update_acc_graph_dash(n_clicks, value, n_intervals):
                Input('input_text', 'value'),
                Input('interval', 'n_intervals')])
 def update_confusion_matrix_training_dash(n_clicks, value, n_intervals):
+    """
+
+    Function that just calls the update_confusion_matrix_training function. This
+    function is decorated by the Dash Application decorator. Such an arrangement
+    is used as unit testing decorated functions is complex.
+
+    """
+
     figure = update_confusion_matrix_training(value)
     return figure
 
@@ -3129,6 +3177,14 @@ def update_confusion_matrix_training_dash(n_clicks, value, n_intervals):
                Input('input_text', 'value'),
                Input('interval', 'n_intervals')])
 def update_confusion_matrix_validation_dash(n_clicks, value, n_intervals):
+    """
+
+    Function that just calls the update_confusion_matrix_validation function.
+    This function is decorated by the Dash Application decorator. Such an
+    arrangement is used as unit testing decorated functions is complex.
+
+    """
+
     figure = update_confusion_matrix_validation(value)
     return figure
 
@@ -3138,6 +3194,14 @@ def update_confusion_matrix_validation_dash(n_clicks, value, n_intervals):
                Input('input_text', 'value'),
                Input('interval', 'n_intervals')])
 def update_confusion_matrix_test_dash(n_clicks, value, n_intervals):
+    """
+
+    Function that just calls the update_confusion_matrix_test function. This
+    function is decorated by the Dash Application decorator. Such an arrangement
+    is used as unit testing decorated functions is complex.
+
+    """
+
     figure = update_confusion_matrix_test(value)
     return figure
 
@@ -3147,6 +3211,14 @@ def update_confusion_matrix_test_dash(n_clicks, value, n_intervals):
                Input('input_text', 'value'),
                Input('interval', 'n_intervals')])
 def update_confusion_metrics_training_dash(n_clicks, value, n_intervals):
+    """
+
+    Function that just calls the update_confusion_metrics_training function.
+    This function is decorated by the Dash Application decorator. Such an
+    arrangement is used as unit testing decorated functions is complex.
+
+    """
+
     figure = update_confusion_metrics_training(value)
     return figure
 
@@ -3156,6 +3228,14 @@ def update_confusion_metrics_training_dash(n_clicks, value, n_intervals):
                Input('input_text', 'value'),
                Input('interval', 'n_intervals')])
 def update_confusion_metrics_validation_dash(n_clicks, value, n_intervals):
+    """
+
+    Function that just calls the update_confusion_metrics_validation function.
+    This function is decorated by the Dash Application decorator. Such an
+    arrangement is used as unit testing decorated functions is complex.
+
+    """
+
     figure = update_confusion_metrics_validation(value)
     return figure
 
@@ -3165,6 +3245,14 @@ def update_confusion_metrics_validation_dash(n_clicks, value, n_intervals):
                Input('input_text', 'value'),
                Input('interval', 'n_intervals')])
 def update_confusion_metrics_test_dash(n_clicks, value, n_intervals):
+    """
+
+    Function that just calls the update_confusion_metrics_test function. This
+    function is decorated by the Dash Application decorator. Such an arrangement
+    is used as unit testing decorated functions is complex.
+
+    """
+
     figure = update_confusion_metrics_test(value)
     return figure
 

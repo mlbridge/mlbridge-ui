@@ -2188,6 +2188,21 @@ def update_loss_graph(n_clicks, value):
 
 
 def update_acc_graph(n_clicks, value):
+    """
+
+    Function that returns a line graph of the accuracy graph (accuracy
+    percentage vs epochs) of the deep learning model.
+
+    Args:
+        n_clicks: Contains the number of clicks registered by the submit button.
+        value: Contains the model name that is currently being trained or is
+               an older model whose efficacy has to be investigated.
+
+    Returns:
+        An accuracy graph of the deep learning model.
+
+    """
+
     layout_loss = copy.deepcopy(layout)
     layout_loss['title'] = 'Accuracy Graph'
     layout_loss['xaxis'] = {'title': 'Epochs'}

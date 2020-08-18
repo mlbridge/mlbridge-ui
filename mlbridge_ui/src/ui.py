@@ -2518,6 +2518,19 @@ def update_confusion_metrics_training(value):
 
 
 def update_confusion_metrics_validation(value):
+    """
+
+    Returns the confusion metrics of the model after training on the validation
+    dataset.
+
+    Args:
+        value: Contains the model name whose efficacy has to be investigated.
+
+    Returns:
+          Confusion metrics of the trained model on the validation dataset.
+
+    """
+
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
     if (es.get(index='model', id=1)['_source']['training'] == 0) \
@@ -2581,6 +2594,19 @@ def update_confusion_metrics_validation(value):
 
 
 def update_confusion_metrics_test(value):
+    """
+
+    Returns the confusion metrics of the model after training on the test
+    dataset.
+
+    Args:
+        value: Contains the model name whose efficacy has to be investigated.
+
+    Returns:
+          Confusion metrics of the trained model on the test dataset.
+
+    """
+
     layout_confusion = copy.deepcopy(layout_training_confusion_met)
     layout_confusion['height'] = 200
     if (es.get(index='model', id=1)['_source']['training'] == 0) \

@@ -1761,6 +1761,30 @@ def update_and_input_vet_message_vet_tables(n_clicks, not_vetted_select,
                                             honeypot_vet_select,
                                             blacklist_vet_select,
                                             change_status):
+    """
+
+    Function that returns a message regarding the options selected for manually
+    vetting domain names.
+
+    Args:
+        n_clicks: Contains the number of clicks registered by the submit button.
+        not_vetted_select: Contains the list of domains that have been selected
+                           for vetting from the list of non - vetted domains.
+        benign_vet_select: Contains the list of domains that have been selected
+                           for a list change from the list of benign domains.
+        honeypot_vet_select: Contains the list of domains that have been selected
+                             for a list change from the list of honeypot domains.
+        blacklist_vet_select: Contains the list of domains that have been selected
+                              for a list change from the list of malicious domains.
+        change_status: Radio button that contains option of the list the domains
+                       selected have to be changed to.
+
+    Returns:
+        A message regarding the options selected for manually vetting domain
+        names.
+
+    """
+
     vet_list = [not_vetted_select, benign_vet_select, honeypot_vet_select,
                 blacklist_vet_select]
     es_vet_list_names = ['not_vetted', 'benign_vet', 'honeypot', 'blacklist']

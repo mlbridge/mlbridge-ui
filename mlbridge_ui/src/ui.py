@@ -1851,6 +1851,20 @@ def update_not_vetted_table(n_intervals):
 
 
 def update_benign_vet_table(n_intervals):
+    """
+
+    Function that returns the updated data of the list of benign domains after a
+    specific interval.
+
+    Args:
+        n_intervals: Contains the interval after which the data has to be
+        updated.
+
+    Returns:
+        The updated data of the list of benign domains.
+
+    """
+
     try:
         benign_vet = es.get(index='benign_vet', id=1)['_source']
         data = [dict({'sl_no': j + 1, 'domain': i,
@@ -1863,6 +1877,20 @@ def update_benign_vet_table(n_intervals):
 
 
 def update_honeypot_vet_table(n_intervals):
+    """
+
+    Function that returns the updated data of the list of honeypot domains after
+    a specific interval.
+
+    Args:
+        n_intervals: Contains the interval after which the data has to be
+        updated.
+
+    Returns:
+        The updated data of the list of honeypot domains.
+
+    """
+
     try:
         honeypot_vet = es.get(index='honeypot', id=1)['_source']
         data = [dict({'sl_no': j + 1, 'domain': i,
@@ -1875,6 +1903,20 @@ def update_honeypot_vet_table(n_intervals):
 
 
 def update_blacklist_vet_table(n_intervals):
+    """
+
+    Function that returns the updated data of the list of malicious domains
+    after a specific interval.
+
+    Args:
+        n_intervals: Contains the interval after which the data has to be
+        updated.
+
+    Returns:
+        The updated data of the list of malicious domains.
+
+    """
+
     try:
         blacklist_vet = es.get(index='blacklist', id=1)['_source']
         data = [dict({'sl_no': j + 1, 'domain': i,

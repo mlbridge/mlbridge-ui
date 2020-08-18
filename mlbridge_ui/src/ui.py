@@ -1825,6 +1825,20 @@ def update_and_input_vet_message_vet_tables(n_clicks, not_vetted_select,
 
 
 def update_not_vetted_table(n_intervals):
+    """
+
+    Function that returns the updated data of the list of non - vetted domains
+    after a specific interval.
+
+    Args:
+        n_intervals: Contains the interval after which the data has to be
+        updated.
+
+    Returns:
+        The updated data of the list of non - vetted domains.
+
+    """
+
     try:
         not_vetted = es.get(index='not_vetted', id=1)['_source']
         data = [dict({'sl_no': j + 1, 'domain': i,

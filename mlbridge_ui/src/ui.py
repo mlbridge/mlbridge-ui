@@ -1591,6 +1591,19 @@ def display_benign_graph(value):
 
 
 def update_benign_dns_table(nclicks, value):
+    """
+
+    Function that returns the data that contains the list of benign domains.
+
+    Args:
+        nclicks: Contains the number of clicks registered by the submit button.
+        value: Contains the value of the toggle switch.
+
+    Returns:
+        Data that contains the list of benign domains.
+
+    """
+
     try:
         benign = es.get(index='benign', id=1)['_source']
         domain_names = [key for (key, value) in

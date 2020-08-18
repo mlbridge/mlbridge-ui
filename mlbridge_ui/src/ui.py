@@ -2068,6 +2068,20 @@ def update_display_training_options(value):
 
 
 def update_loss_accuracy_display(value):
+    """
+
+    Function that either displays the loss graph or the accuracy graph of the
+    deep learning model depending on the value of the toggle switch.
+
+    Args:
+        value: Contains the value of the toggle switch.
+
+    Returns:
+        Two dictionaries that communicates with the Dash interface whether to
+        display the accuracy graph or loss graph.
+
+    """
+
     if value is False:
         return {'display': 'unset'}, {'display': 'none'}
     else:

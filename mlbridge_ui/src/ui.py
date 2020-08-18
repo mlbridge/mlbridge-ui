@@ -1933,6 +1933,25 @@ def update_blacklist_vet_table(n_intervals):
 
 def update_es_parameters_and_messages(model_name, option, epochs_input,
                                       batch_input, sample_input):
+    """
+
+    Functions that updates model training information in the Elasticsearch
+    Database and also returns messages for the data entered by the user.
+
+    Args:
+        model_name: Contains the model name entered by the user.
+        option: Contains the option whether to train a new model or display the
+                statistics that explain the efficacy of an older model.
+        epochs_input: Contains the number of epochs entered for training by the
+                      user.
+        batch_input: Contains the batch size entered for training by the user.
+        sample_input: Contains the sample size entered for training by the user.
+
+    Returns:
+        Messages to the user as a response to the options filled.
+
+    """
+
     model_message = 'Please enter a model name'
     epochs_message = 'Please enter an integer value'
     batch_message = 'Please enter an integer value'

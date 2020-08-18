@@ -2680,6 +2680,14 @@ def update_confusion_metrics_test(value):
               [Input('submit_input', 'n_clicks')],
               [State('input_text', 'value')])
 def input_message_dash(n_clicks, value):
+    """
+
+    Function that just calls the input_message function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     return_input_message = input_message(n_clicks, value)
     return return_input_message
 
@@ -2690,6 +2698,14 @@ def input_message_dash(n_clicks, value):
                Input('date_range', 'start_date'),
                Input('date_range', 'end_date')])
 def date_message_dash(n_clicks, freq, start_date, end_date):
+    """
+
+    Function that just calls the date_message function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     date_message_ = date_message(n_clicks, freq, start_date, end_date)
     return date_message_
 
@@ -2698,6 +2714,14 @@ def date_message_dash(n_clicks, freq, start_date, end_date):
               [Input('submit_input', 'n_clicks'),
                Input('requests_freq', 'value')])
 def radio_button_message_dash(n_clicks, value):
+    """
+
+    Function that just calls the radio_button_message function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     radio_button_message_ = radio_button_message(n_clicks, value)
     return radio_button_message_
 
@@ -2707,6 +2731,14 @@ def radio_button_message_dash(n_clicks, value):
                Input('start_hour', 'value'),
                Input('end_hour', 'value')])
 def hour_range_message_dash(freq, start, end):
+    """
+
+    Function that just calls the hour_range_message function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     hour_range_message_ = hour_range_message(freq, start, end)
     return hour_range_message_
 
@@ -2717,6 +2749,14 @@ def hour_range_message_dash(freq, start, end):
 @app.callback(Output('hour_range', 'style'),
               [Input('requests_freq', 'value')])
 def display_hour_range_dash(value):
+    """
+
+    Function that just calls the display_hour_range function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     display = display_hour_range(value)
     return display
 
@@ -2725,6 +2765,14 @@ def display_hour_range_dash(value):
               [Input('submit_input', 'n_clicks')],
               [State('input_text', 'value')])
 def update_pie_graph_dash(n_clicks, value):
+    """
+
+    Function that just calls the update_pie_graph function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     figure = update_pie_graph(n_clicks, value)
     return figure
 
@@ -2739,6 +2787,14 @@ def update_pie_graph_dash(n_clicks, value):
                State('requests_freq', 'value')])
 def update_line_graph_dash(n_clicks, start_hour, end_hour, input_value,
                            start_date, end_date, freq_value):
+    """
+
+    Function that just calls the update_line_graph function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     figure = update_line_graph(n_clicks, start_hour, end_hour, input_value,
                                start_date, end_date, freq_value)
     return figure
@@ -2748,6 +2804,14 @@ def update_line_graph_dash(n_clicks, start_hour, end_hour, input_value,
               [Input('submit_input', 'n_clicks')],
               [State('input_text', 'value')])
 def update_ip_table_dash(nclicks, value):
+    """
+
+    Function that just calls the update_ip_table function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     data = update_ip_table(nclicks, value)
     return data
 
@@ -2755,6 +2819,14 @@ def update_ip_table_dash(nclicks, value):
 @app.callback(Output('mal_dns_table_div', 'style'),
               [Input('mal_toggle_switch', 'value')])
 def display_mal_list_dash(value):
+    """
+
+    Function that just calls the display_mal_list function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     display = display_mal_list(value)
     return display
 
@@ -2762,6 +2834,14 @@ def display_mal_list_dash(value):
 @app.callback(Output('mal_bar_graph_div', 'style'),
               [Input('mal_toggle_switch', 'value')])
 def display_mal_graph_dash(value):
+    """
+
+    Function that just calls the display_mal_graph function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     display = display_mal_graph(value)
     return display
 
@@ -2770,6 +2850,14 @@ def display_mal_graph_dash(value):
               [Input('mal_toggle_switch', 'value'),
                Input('interval', 'n_intervals')])
 def update_mal_dns_table_dash(nclicks, value):
+    """
+
+    Function that just calls the update_mal_dns_table function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     data = update_mal_dns_table(nclicks, value)
     return data
 
@@ -2778,6 +2866,14 @@ def update_mal_dns_table_dash(nclicks, value):
               [Input('mal_toggle_switch', 'value'),
                Input('interval', 'n_intervals')])
 def update_mal_bar_graph_dash(value, interval):
+    """
+
+    Function that just calls the update_mal_bar_graph function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     figure = update_mal_bar_graph(value, interval)
     return figure
 
@@ -2785,6 +2881,14 @@ def update_mal_bar_graph_dash(value, interval):
 @app.callback(Output('benign_dns_table_div', 'style'),
               [Input('benign_toggle_switch', 'value')])
 def display_benign_list_dash(value):
+    """
+
+    Function that just calls the display_benign_list function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     display = display_benign_list(value)
     return display
 
@@ -2792,6 +2896,14 @@ def display_benign_list_dash(value):
 @app.callback(Output('benign_bar_graph_div', 'style'),
               [Input('benign_toggle_switch', 'value')])
 def display_benign_graph_dash(value):
+    """
+
+    Function that just calls the display_benign_graph function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used as
+    unit testing decorated functions is complex.
+
+    """
+
     display = display_benign_graph(value)
     return display
 
@@ -2800,6 +2912,14 @@ def display_benign_graph_dash(value):
               [Input('mal_toggle_switch', 'value'),
                Input('interval', 'n_intervals')])
 def update_benign_dns_table_dash(nclicks, value):
+    """
+
+    Function that just calls the update_benign_dns_table function. This function
+    is decorated by the Dash Application decorator. Such an arrangement is used
+    as unit testing decorated functions is complex.
+
+    """
+
     data = update_benign_dns_table(nclicks, value)
     return data
 
@@ -2808,6 +2928,14 @@ def update_benign_dns_table_dash(nclicks, value):
               [Input('benign_toggle_switch', 'value'),
                Input('interval', 'n_intervals')])
 def update_benign_bar_graph_dash(value, interval):
+    """
+
+    Function that just calls the update_benign_bar_graph function. This function
+    is decorated by the Dash Application decorator. Such an arrangement is used
+    as unit testing decorated functions is complex.
+
+    """
+
     figure = update_benign_bar_graph(value, interval)
     return figure
 
@@ -2823,6 +2951,14 @@ def update_benign_bar_graph_dash(value, interval):
               [Input('submit_input', 'n_clicks')],
               [State('input_text', 'value')])
 def update_whois_info_dash(n_clicks, domain_name):
+    """
+
+    Function that just calls the update_whois_info function. This function is
+    decorated by the Dash Application decorator. Such an arrangement is used
+    as unit testing decorated functions is complex.
+
+    """
+
     whois_domain, whois_ips, whois_hostnames, whois_city, whois_state, \
     whois_country, whois_date, whois_registrar = \
         update_whois_info(n_clicks, domain_name)
@@ -2850,6 +2986,14 @@ def update_and_input_vet_message_vet_tables_dash(n_clicks, not_vetted_select,
                                                  honeypot_vet_select,
                                                  blacklist_vet_select,
                                                  change_status):
+    """
+
+    Function that just calls the update_and_input_vet_message_vet_tables
+    function. This function is decorated by the Dash Application decorator. Such
+    an arrangement is used as unit testing decorated functions is complex.
+
+    """
+
     message, _, _, _, _, _ = update_and_input_vet_message_vet_tables(n_clicks,
                                                                      not_vetted_select,
                                                                      benign_vet_select,
@@ -2862,6 +3006,14 @@ def update_and_input_vet_message_vet_tables_dash(n_clicks, not_vetted_select,
 @app.callback(Output('not_vetted_table', 'data'),
               [Input('interval', 'n_intervals')])
 def update_not_vetted_table_dash(n_intervals):
+    """
+
+    Function that just calls the update_not_vetted_table function. This function
+    is decorated by the Dash Application decorator. Such an arrangement is used
+    as unit testing decorated functions is complex.
+
+    """
+
     data = update_not_vetted_table(n_intervals)
     return data
 
@@ -2869,6 +3021,14 @@ def update_not_vetted_table_dash(n_intervals):
 @app.callback(Output('benign_vet_table', 'data'),
               [Input('interval', 'n_intervals')])
 def update_benign_vet_table_dash(n_intervals):
+    """
+
+    Function that just calls the update_benign_vet_table function. This function
+    is decorated by the Dash Application decorator. Such an arrangement is used
+    as unit testing decorated functions is complex.
+
+    """
+
     data = update_benign_vet_table(n_intervals)
     return data
 
@@ -2876,6 +3036,14 @@ def update_benign_vet_table_dash(n_intervals):
 @app.callback(Output('honeypot_vet_table', 'data'),
               [Input('interval', 'n_intervals')])
 def update_honeypot_vet_table_dash(n_intervals):
+    """
+
+    Function that just calls the update_honeypot_vet_table function. This
+    function is decorated by the Dash Application decorator. Such an arrangement
+    is used as unit testing decorated functions is complex.
+
+    """
+
     data = update_honeypot_vet_table(n_intervals)
     return data
 
@@ -2883,6 +3051,14 @@ def update_honeypot_vet_table_dash(n_intervals):
 @app.callback(Output('blacklist_vet_table', 'data'),
               [Input('interval', 'n_intervals')])
 def update_blacklist_vet_table_dash(n_intervals):
+    """
+
+    Function that just calls the update_blacklist_vet_table function. This
+    function is decorated by the Dash Application decorator. Such an arrangement
+    is used as unit testing decorated functions is complex.
+
+    """
+
     data = update_blacklist_vet_table(n_intervals)
     return data
 

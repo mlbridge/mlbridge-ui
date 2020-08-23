@@ -1831,8 +1831,7 @@ def update_not_vetted_table(n_intervals):
     after a specific interval.
 
     Args:
-        n_intervals: Contains the interval after which the data has to be
-        updated.
+        n_intervals: Contains the interval after which the data has to be updated.
 
     Returns:
         The updated data of the list of non - vetted domains.
@@ -1857,8 +1856,7 @@ def update_benign_vet_table(n_intervals):
     specific interval.
 
     Args:
-        n_intervals: Contains the interval after which the data has to be
-        updated.
+        n_intervals: Contains the interval after which the data has to be updated.
 
     Returns:
         The updated data of the list of benign domains.
@@ -1883,8 +1881,7 @@ def update_honeypot_vet_table(n_intervals):
     a specific interval.
 
     Args:
-        n_intervals: Contains the interval after which the data has to be
-        updated.
+        n_intervals: Contains the interval after which the data has to be updated.
 
     Returns:
         The updated data of the list of honeypot domains.
@@ -1909,8 +1906,7 @@ def update_blacklist_vet_table(n_intervals):
     after a specific interval.
 
     Args:
-        n_intervals: Contains the interval after which the data has to be
-        updated.
+        n_intervals: Contains the interval after which the data has to be updated.
 
     Returns:
         The updated data of the list of malicious domains.
